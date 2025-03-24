@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #555;
+    color: white;
+    font-size: 18pt;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+.logo span {
+    color: lightgreen;
+}
+
+.logo .bay {
+    color: white;
+}
+
+.search-bar {
+    width: 60%;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18pt;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18pt;
+}
+
+.nav-icons a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-icons a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.main-content p {
+    font-size: 22pt;
+    margin: 20px 0;
+}
+
+.main-content button {
+    margin: 15px;
+    padding: 16px 60px;
+    font-size: 20pt;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px);
+}
+
+.card {
+    background-color: #d3d3d3;
+    padding: 70px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #333;
+}
+
+.card p {
+    font-size: 18px;
+    color: #222;
+}
+
