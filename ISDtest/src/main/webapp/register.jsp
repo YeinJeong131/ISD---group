@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div>
+<div class="register_parent_container">
     <div class="title">
         <h2>Registeration form</h2>
     </div>
@@ -106,7 +106,7 @@
             <%
                 }
             %>
-            <button type="submit">Register</button>
+            <button class="register_button" type="submit">Register</button>
         </form>
     </div>
 </div>

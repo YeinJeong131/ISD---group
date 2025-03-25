@@ -86,7 +86,7 @@ body {
     background-color: #d3d3d3;
     padding: 70px;
     border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -101,3 +101,50 @@ body {
     color: #222;
 }
 
+/* register.jsp css */
+.title {
+    color: lightgreen;
+}
+.register_parent_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    width:600px;
+    padding: 30px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #777;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+    height: auto;
+}
+.title, .content {
+    /*margin-bottom: 10px; */
+    text-align: center;
+}
+.content label, input {
+    margin-bottom: 15px;
+}
+.content input {
+    width: 300px;
+}
+.register_button {
+    margin-top: 30px;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    font-size: 18px;
+    background-color: lightgreen;
+    font-weight: bold;
+    color: #555;
+}
+.register_button:hover {
+    background-color: #333;
+}
+.register_parent_container label {
+    font-size: 18px;
+}
