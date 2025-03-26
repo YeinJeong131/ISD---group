@@ -9,16 +9,19 @@
     String date = request.getParameter("date of birth");
     String name = first + " " + last;
 
-    boolean firstLast = first != null || last != null;
+    if (first != null && last != null) {
+        User loggedInUser = new User();
+        loggedInUser.setEmail(email);
+        loggedInUser.setPassword(password);
+        loggedInUser.setName(first, last);
+        loggedInUser.setAddress(address);
+        loggedInUser.setDateOfBirth(date);
 
-    if (firstLast){
-        User newCustomer = new User();
-        newCustomer.setEmail(email);
-        newCustomer.setPassword(password);
-        newCustomer.setName(first, last);
-        newCustomer.setAddress(address);
-        newCustomer.setDateOfBirth(date);
-
+        session.setAttribute("user", loggedInUser);
+        response.sendRedirect("main.jsp");
+    } else {
+        response.sendRedirect("login.jsp");
+    }
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -41,21 +44,12 @@
     <div class="card">
         <h2>You successfully registered in IoTBay <%=name%> !</h2>
         <p>Let's login to explore more about our products</p>
-            <form action="login.jsp" method="get">
-                <button class="login-btn" type="submit">Login</button>
-            </form>
+        <form action="login.jsp" method="get">
+            <button class="login-btn" type="submit">Login</button>
+        </form>
     </div>
 </div>
 
 </body>
 </html>
-<%
-} else {
-        User customer = new User();
-        customer.setEmail(email);
-        customer.setPassword(password);
 
-        session.setAttribute("Customer", customer);
-        response.sendRedirect("main.jsp");
-}
-    %>
