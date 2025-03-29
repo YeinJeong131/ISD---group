@@ -10,7 +10,7 @@
         <h2>Registeration form</h2>
     </div>
     <div class="content">
-        <form action="welcome.jsp" method="post">
+        <form action="index.jsp" method="post">
 
             <label for="firstName">First name:</label>
             <input  id="firstName" name="firstName" type="text" maxlength="10" pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" required>
@@ -55,12 +55,12 @@
                         <%=
                         "card".equals(request.getParameter("paymentMethod"))? "selected" : ""
                         %>
-                >Bank</option>
+                >Card</option>
                 <option value="bank"
                         <%=
                         "bank".equals(request.getParameter("paymentMethod"))? "selected" : ""
                         %>
-                >Card</option>
+                >Bank</option>
             </select>
             <br>
 
@@ -110,5 +110,10 @@
         </form>
     </div>
 </div>
+
+
+
+
 </body>
 </html>
+

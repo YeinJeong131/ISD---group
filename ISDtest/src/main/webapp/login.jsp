@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +25,18 @@
 <body>
 <div class="content">
     <h2>Login</h2>
+    <%
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
 
-    <form action="welcome.jsp" method="post">
+    %>
+        <H3>Before Login Register first</H3>
+        <button onclick="location.href='fixRegister.jsp'">Register</button>
+
+    <%
+        } else {
+    %>
+    <form action="fixIndex.jsp" method="post">
         <label for="email">Email:</label>
         <input id="email" name="email" type="email" required>
         <br><br>
@@ -37,6 +49,10 @@
 
         <button type="submit">Login</button>
     </form>
+
+    <%
+        }
+    %>
 </div>
 </body>
 </html>

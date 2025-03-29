@@ -148,3 +148,8 @@ body {
 .register_parent_container label {
     font-size: 18px;
 }
+
+/*revise index.jsp*/
+.nav-icons {
+    font-size: 5px;
+}

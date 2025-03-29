@@ -18,6 +18,7 @@
     </div>
 
     <div class="nav-icons">
+        <a href="fixRegister.jsp">Register</a>
         <a href="login.jsp">Login</a>
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
@@ -27,7 +28,7 @@
     <p>Have ID?</p>
     <button onclick="location.href='login.jsp'">Login</button>
     <p>New customer?</p>
-    <button onclick="location.href='register.jsp'">Register</button>
+    <button onclick="location.href='fixRegister.jsp'">Register</button>
 </div>
 
 </body>

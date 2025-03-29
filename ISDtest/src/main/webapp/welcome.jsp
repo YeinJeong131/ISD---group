@@ -6,7 +6,7 @@
     String first = request.getParameter("firstName");
     String last = request.getParameter("lastName");
     String address = request.getParameter("address");
-    String date = request.getParameter("date of birth");
+    String date = request.getParameter("dob");
     String name = first + " " + last;
 
     if (first != null && last != null) {
@@ -19,8 +19,10 @@
 
         session.setAttribute("user", loggedInUser);
         response.sendRedirect("main.jsp");
+
     } else {
         response.sendRedirect("login.jsp");
+
     }
 %>
 <!DOCTYPE html>
