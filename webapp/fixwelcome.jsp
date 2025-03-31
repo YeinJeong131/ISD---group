@@ -8,6 +8,18 @@
     String address = request.getParameter("address");
     String date = request.getParameter("dob");
     String name = first + " " + last;
+
+    User loggedInUser = null;
+    if (first != null && last != null) {
+        loggedInUser = new User();
+        loggedInUser.setEmail(email);
+        loggedInUser.setPassword(password);
+        loggedInUser.setFirstName(first);
+        loggedInUser.setLastName(last);
+        loggedInUser.setAddress(address);
+        loggedInUser.setDateOfBirth(date);
+    }
+    session.setAttribute("user", loggedInUser);
 %>
 
 <!DOCTYPE html>
@@ -25,19 +37,6 @@
     </div>
 </header>
 
-
-<%
-    if (first != null && last != null) {
-        User loggedInUser = new User();
-        loggedInUser.setEmail(email);
-        loggedInUser.setPassword(password);
-        loggedInUser.setFirstName(first);
-        loggedInUser.setLastName(last);
-        loggedInUser.setAddress(address);
-        loggedInUser.setDateOfBirth(date);
-
-        session.setAttribute("user", loggedInUser);
-%>
 <div class="center-box">
     <div class="card">
         <h2>You successfully registered in IoTBay <%=name%> !</h2>
@@ -50,17 +49,11 @@
         </form>
     </div>
 </div>
-<%
-} else {
 
-%>
 <div class="center-box">
     <h2>You failed to register in IoTBay</h2>
     <button><a href="register.jsp">Register again</a></button>
 </div>
-<%
-    }
-%>
 
 </body>
 </html>
