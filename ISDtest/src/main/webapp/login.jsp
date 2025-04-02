@@ -5,38 +5,23 @@
 <html>
 <head>
     <title>Login</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .content {
-            text-align: center;
-            background: #f8f8f8;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="content">
+<div class="login_parent_container">
     <h2>Login</h2>
     <%
         User user = (User) session.getAttribute("user");
         if (user == null) {
 
     %>
-        <H3>Before Login Register first</H3>
-        <button onclick="location.href='fixRegister.jsp'">Register</button>
+    <H3>Before Login Register first</H3>
+    <button onclick="location.href='register.jsp'">Register</button>
 
     <%
-        } else {
+    } else {
     %>
-    <form action="fixIndex.jsp" method="post">
+    <form action="index.jsp" method="post">
         <label for="email">Email:</label>
         <input id="email" name="email" type="email" required>
         <br><br>
@@ -47,7 +32,7 @@
                title="Must be at least 12 characters long, including at least 1 uppercase letter, 1 special character, and 1 number">
         <br><br>
 
-        <button type="submit">Login</button>
+        <button class="login_button" type="submit">Login</button>
     </form>
 
     <%
