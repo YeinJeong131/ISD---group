@@ -48,6 +48,7 @@ body {
 .nav-icons a {
     color: white;
     text-decoration: none;
+    font-size: 16pt;
 }
 
 .nav-icons a:hover {
