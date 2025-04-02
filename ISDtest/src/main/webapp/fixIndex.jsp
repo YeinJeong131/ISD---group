@@ -17,47 +17,47 @@
     User registeredUser = (User) session.getAttribute("user");
     if (registeredUser != null && registeredUser.getEmail().equals(email) && registeredUser.getPassword().equals(password)) {
 %>
-    <div class="navbar">
-        <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
+<div class="navbar">
+    <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-        </div>
-
-        <div class="nav-icons">
-            <h4>User name: <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%></h4>
-            <a href="userInfo.jsp"><image src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
-            <a href="logout.jsp">log out</a>
-        </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
     </div>
-    <div class="main-content">Welcome back <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%> !</div>
+
+    <div class="nav-icons">
+        <h4>User name: <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%></h4>
+        <a href="userInfo.jsp"><image src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
+        <a href="logout.jsp">log out</a>
+    </div>
+</div>
+<div class="main-content">Welcome back <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%> !</div>
 <%
-    } else {
+} else {
 
 %>
-    <div class="navbar">
-        <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
+<div class="navbar">
+    <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-        </div>
-
-        <div class="nav-icons">
-            <a href="fixRegister.jsp">Register</a>
-            <a href="login.jsp">Login</a>
-            <a href="cart.jsp" class="cart-text">Cart</a>
-        </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
     </div>
 
-    <div class="main-content">
-        <p>Have ID?</p>
-        <button onclick="location.href='login.jsp'">Login</button>
-        <p>New customer?</p>
-        <button onclick="location.href='fixRegister.jsp'">Register</button>
+    <div class="nav-icons">
+        <a href="fixRegister.jsp">Register</a>
+        <a href="login.jsp">Login</a>
+        <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
+</div>
+
+<div class="main-content">
+    <p>Have ID?</p>
+    <button onclick="location.href='login.jsp'">Login</button>
+    <p>New customer?</p>
+    <button onclick="location.href='fixRegister.jsp'">Register</button>
+</div>
 
 
-    <br>
+<br>
 <%
     }
 %>
@@ -66,7 +66,7 @@
     String message = request.getParameter("message");
     if ("logout".equals(message)) {
 %>
-    <h2 style="color: green;">successfully log out</h2>
+<h2 class="log_out">successfully log out</h2>
 <%
     }
 %>
