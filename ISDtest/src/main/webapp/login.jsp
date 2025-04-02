@@ -21,7 +21,7 @@
     <%
     } else {
     %>
-    <form action="index.jsp" method="post">
+    <form action="fixIndex.jsp" method="post">
         <label class="login_label" for="email">Email:</label>
         <input id="email" name="email" type="email" required>
         <br><br>
