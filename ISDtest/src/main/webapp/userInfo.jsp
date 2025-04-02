@@ -24,7 +24,7 @@
     <li class="info_li"><strong>Date of Birth:</strong> <%= user.getDateOfBirth() %></li>
 </ul>
 
-<button class="info_button" onclick="location.href='index.jsp'">Back to Home</button>
+<button class="info_button" onclick="location.href='fixIndex.jsp'">Back to Home</button>
 
 <%
 } else {
