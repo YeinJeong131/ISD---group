@@ -16,15 +16,15 @@
 <%
     if (user != null) {
 %>
-<h2>User Information</h2>
-<ul>
-    <li><strong>Full Name:</strong> <%= user.getFirstName() %> <%= user.getLastName() %></li>
-    <li><strong>Email:</strong> <%= user.getEmail() %></li>
-    <li><strong>Address:</strong> <%= user.getAddress() %></li>
-    <li><strong>Date of Birth:</strong> <%= user.getDateOfBirth() %></li>
+<h2 class="info_h2">User Information</h2>
+<ul class="info_ul">
+    <li class="info_li"><strong>Full Name:</strong> <%= user.getFirstName() %> <%= user.getLastName() %></li>
+    <li class="info_li"><strong>Email:</strong> <%= user.getEmail() %></li>
+    <li class="info_li"><strong>Address:</strong> <%= user.getAddress() %></li>
+    <li class="info_li"><strong>Date of Birth:</strong> <%= user.getDateOfBirth() %></li>
 </ul>
 
-<button onclick="location.href='fixIndex.jsp'">Back to Home</button>
+<button class="info_button" onclick="location.href='index.jsp'">Back to Home</button>
 
 <%
 } else {
