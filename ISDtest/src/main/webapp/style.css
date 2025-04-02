@@ -42,7 +42,6 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 18pt;
 }
 
 .nav-icons a {
@@ -53,6 +52,20 @@ body {
 
 .nav-icons a:hover {
     text-decoration: underline;
+}
+
+.nav-icons h4 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.nav-icons img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
 }
 
 .main-content {
@@ -175,5 +188,14 @@ body {
     cursor: pointer;
 }
 
+.log_out {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: green;
+    padding: 20px;
+    margin: 10px;
+    z-index: 1000;
+}
 
 
