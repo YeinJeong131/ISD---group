@@ -48,10 +48,7 @@
         </form>
     </div>
 </div>
-<%
-    } else {
 
-%>
 <div class="center-box">
     <h2>You failed to register in IoTBay</h2>
     <button><a href="fixRegister.jsp">Register again</a></button>
@@ -62,4 +59,3 @@
 
 </body>
 </html>
-
