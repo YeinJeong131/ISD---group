@@ -43,7 +43,7 @@
     </div>
 
     <div class="nav-icons">
-        <a href="register.jsp">fixRegister</a>
+        <a href="fixRegister.jsp">fixRegister</a>
         <a href="login.jsp">Login</a>
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
