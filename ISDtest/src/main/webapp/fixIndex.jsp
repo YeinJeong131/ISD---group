@@ -26,8 +26,9 @@
 
     <div class="nav-icons">
         <h4>User name: <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%></h4>
-        <a href="userInfo.jsp"><image src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
+        <a href="userInfo.jsp"><img src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
         <a href="logout.jsp">log out</a>
+        <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
 </div>
 <div class="main-content">Welcome back <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%> !</div>
@@ -43,7 +44,7 @@
     </div>
 
     <div class="nav-icons">
-        <a href="fixRegister.jsp">fixRegister</a>
+        <a href="fixRegister.jsp">Register</a>
         <a href="login.jsp">Login</a>
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
