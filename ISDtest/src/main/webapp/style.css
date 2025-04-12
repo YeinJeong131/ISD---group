@@ -49,6 +49,7 @@ body {
     color: white;
     text-decoration: none;
     font-size: 12pt;
+    padding: 8px;
 }
 
 .nav-icons a:hover {
