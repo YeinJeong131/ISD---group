@@ -49,7 +49,6 @@ body {
     color: white;
     text-decoration: none;
     font-size: 12pt;
-    padding: 8px;
 }
 
 .nav-icons a:hover {
@@ -169,6 +168,10 @@ body {
 .nav-icons {
     font-size: 5px;
 }
+.nav-icons a{
+    font-size: 16px;
+    padding: 8px;
+}
 
 .login_parent_container {
     background-color: #777;
@@ -209,7 +212,7 @@ body {
     width: 100%;
     max-width: 600px;
     padding: 30px;
-    margin: 100px auto; /* 修改此处：上下保持 100px，左右自动 */
+    margin: 100px auto; 
     border-radius: 10px;
     box-shadow: 0 2px 15px;
 }
