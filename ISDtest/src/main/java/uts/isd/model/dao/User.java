@@ -1,4 +1,4 @@
-package model;
+package uts.isd.model.dao;
 
 import java.io.Serializable;
 
@@ -10,6 +10,7 @@ public class User implements Serializable {
     private String address;
     private String dateOfBirth;
     private String fullName;
+    private int id;
 
     // 기본 생성자
     public User() {}
@@ -24,7 +25,14 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    // Getter / Setter
+    public User(int id, String email, String password, String firstName, String lastName, String address, String dateOfBirth) {
+        this(email, password, firstName, lastName, address, dateOfBirth);
+        this.id = id;
+    }
+
+
+
+        // Getter / Setter
     public String getEmail() {
         return email;
     }
@@ -77,4 +85,13 @@ public class User implements Serializable {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.User" %>
+<%@ page import="uts.isd.model.dao.User" %>
+<%@ page import="uts.isd.model.dao.DBConnector, uts.isd.model.dao.DBManager, java.sql.SQLException" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +11,19 @@
 </head>
 <body>
 <%
-    // 关键修改：直接从 Session 获取用户对象，而非请求参数
+
     User registeredUser = (User) session.getAttribute("user");
+    DBManager db = (DBManager) session.getAttribute("db");
+    if (db == null) {
+        try {
+            db = new DBManager(new DBConnector().getConnection());
+            session.setAttribute("db", db);
+        } catch (SQLException e) {
+            System.out.println("Failed to connect to database");
+        }
+    }
     if (registeredUser != null) {
-        // 用户已登录，显示登录后的导航栏
+
 %>
 <div class="navbar">
     <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>

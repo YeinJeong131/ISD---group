@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="model.User" %>
+<%@ page import="uts.isd.model.dao.User" %>
 <%
     String email = request.getParameter("email");
     String password = request.getParameter("password");
