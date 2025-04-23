@@ -10,18 +10,11 @@
 <body>
 <div class="login_parent_container">
     <h2>Login</h2>
-    <%
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
+    <% if (request.getParameter("error") != null) { %>
+        <H3>Invalid email or password.</H3>
+    <% } %>
 
-    %>
-    <H3>Before Login Register first</H3>
-    <button onclick="location.href='fixRegister.jsp'">Register</button>
-
-    <%
-    } else {
-    %>
-    <form action="fixIndex.jsp" method="post">
+    <form action="/LoginServlet" method="post">
         <label class="login_label" for="email">Email:</label>
         <input id="email" name="email" type="email" required>
         <br><br>
@@ -35,9 +28,10 @@
         <button class="login_button" type="submit">Login</button>
     </form>
 
-    <%
-        }
-    %>
+    <p>Don't have an account?</p>
+    <button onclick="location.href='fixRegister.jsp'">Register</button>
+
+
 </div>
 </body>
 </html>

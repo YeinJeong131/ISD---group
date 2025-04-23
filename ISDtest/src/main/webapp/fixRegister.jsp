@@ -10,7 +10,7 @@
     <h2>Registeration form</h2>
   </div>
   <div class="content">
-    <form action="fixWelcome.jsp" method="post">
+    <form action="/RegisterServlet" method="post">
 
       <label for="firstName">First name:</label>
       <input  id="firstName" name="firstName" type="text" maxlength="10" pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" required>

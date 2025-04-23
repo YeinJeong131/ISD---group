@@ -63,4 +63,25 @@ public class DBManager {
         preparedStatement.setInt(1, user.getId());
         preparedStatement.executeUpdate();
     }
+
+    //find user
+    public User findUser(String email, String password) throws SQLException {
+        String findingQuery = "SELECT * FROM USERS WHERE Email = ? AND Password = ?";
+        PreparedStatement stmt = connection.prepareStatement(findingQuery);
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return new User(
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getString("address"),
+                    rs.getString("dob")
+                    );
+        }
+        else { return null;}
+    }
 }

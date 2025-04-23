@@ -1,14 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="uts.isd.model.dao.User" %>
-<%
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
-    String first = request.getParameter("firstName");
-    String last = request.getParameter("lastName");
-    String address = request.getParameter("address");
-    String date = request.getParameter("dob");
-    String name = first + " " + last;
-%>
 
 <!DOCTYPE html>
 <html>
@@ -27,17 +18,8 @@
 
 
 <%
-    if (first != null && last != null) {
-        User loggedInUser = new User();
-        loggedInUser.setEmail(email);
-        loggedInUser.setPassword(password);
-        loggedInUser.setFirstName(first);
-        loggedInUser.setLastName(last);
-        loggedInUser.setAddress(address);
-        loggedInUser.setDateOfBirth(date);
-
-        session.setAttribute("user", loggedInUser);
-
+    User user = (User) session.getAttribute("loggedInUser");
+    if (user != null) {
 %>
 <div class="center-box">
     <div class="card">

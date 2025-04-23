@@ -14,14 +14,6 @@
 
     User registeredUser = (User) session.getAttribute("user");
     DBManager db = (DBManager) session.getAttribute("db");
-    if (db == null) {
-        try {
-            db = new DBManager(new DBConnector().getConnection());
-            session.setAttribute("db", db);
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to database");
-        }
-    }
     if (registeredUser != null) {
 
 %>
@@ -33,7 +25,9 @@
     <div class="nav-icons">
         <h4>User name: <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%></h4>
         <a href="userInfo.jsp"><img src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
-        <a href="logout.jsp">log out</a>
+        <form action="/LogoutServlet" method="post">
+            <button>Logout</button>
+        </form>
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
 </div>
