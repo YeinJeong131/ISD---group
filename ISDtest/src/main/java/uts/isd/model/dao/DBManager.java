@@ -1,7 +1,5 @@
 package uts.isd.model.dao;
 
-import uts.isd.model.dao.User;
-
 import java.sql.*;
 
 public class DBManager {
@@ -14,15 +12,15 @@ public class DBManager {
     }
 
     public int getUserCount() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM users");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM user");
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getInt(1);
     }
 
     //CREATE
-    public User addUser(User user) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USERS (Email, Password, FirstName, LastName, Address, DateOfBirth) VALUES (?, ?, ?, ?, ?, ?)");
+    public void addUser(User user) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USER (Email, Password, FirstName, LastName, Address, DateOfBirth) VALUES (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getFirstName());
@@ -32,20 +30,22 @@ public class DBManager {
 
         preparedStatement.executeUpdate();
 
-        preparedStatement = connection.prepareStatement("SELECT MAX(UserId) FROM USERS");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        int userId = resultSet.getInt(1);
-        user.setId(userId);
-        return user;
+        ResultSet keys = preparedStatement.getGeneratedKeys();
+        if (keys.next()) {
+            int id = keys.getInt(1);
+            user.setId(id);
+        } else {
+            System.out.println("failed to add user");
+        }
+
     }
 
     //READ
     //...
 
     //UPDATE
-    public void updateUser(User user) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USERS SET Email = ?, Password = ?, FirstName = ?, LastName = ?, Address = ?, DateOfBirth = ? WHERE UserId = ?");
+    public void updateUser(User user, User newUser) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET Email = ?, Password = ?, FirstName = ?, LastName = ?, Address = ?, DateOfBirth = ? WHERE UserId = ?");
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getFirstName());
@@ -59,14 +59,14 @@ public class DBManager {
     //DELETE
     public void removeUser(User user) throws SQLException {
         System.out.println("ID: " + user.getId());
-        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USERS WHERE UserId = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USER WHERE UserId = ?");
         preparedStatement.setInt(1, user.getId());
         preparedStatement.executeUpdate();
     }
 
     //find user
     public User findUser(String email, String password) throws SQLException {
-        String findingQuery = "SELECT * FROM USERS WHERE Email = ? AND Password = ?";
+        String findingQuery = "SELECT * FROM USERS WHERE email = ? AND password = ?";
         PreparedStatement stmt = connection.prepareStatement(findingQuery);
         stmt.setString(1, email);
         stmt.setString(2, password);
@@ -80,7 +80,7 @@ public class DBManager {
                     rs.getString("lastName"),
                     rs.getString("address"),
                     rs.getString("dob")
-                    );
+            );
         }
         else { return null;}
     }

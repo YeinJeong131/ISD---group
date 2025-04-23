@@ -23,7 +23,7 @@
 %>
 <div class="center-box">
     <div class="card">
-        <h2>You successfully registered in IoTBay <%=name%> !</h2>
+        <h2>You successfully registered in IoTBay <%=user.getFullName()%> !</h2>
         <p>Let's login to explore more about our products</p>
         <form action="login.jsp" method="get">
             <button class="login-btn" type="submit">Login</button>

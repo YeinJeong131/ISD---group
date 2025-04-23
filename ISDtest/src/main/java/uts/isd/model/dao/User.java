@@ -25,14 +25,14 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public User(int id, String email, String password, String firstName, String lastName, String address, String dateOfBirth) {
+    public User(String email, String password, String firstName, String lastName, String address, String dateOfBirth, int id) {
         this(email, password, firstName, lastName, address, dateOfBirth);
         this.id = id;
     }
 
 
 
-        // Getter / Setter
+    // Getter / Setter
     public String getEmail() {
         return email;
     }
@@ -94,4 +94,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public String getFullName() {
+        return fullName != null ? fullName : firstName + " " + lastName;
+    }
 }

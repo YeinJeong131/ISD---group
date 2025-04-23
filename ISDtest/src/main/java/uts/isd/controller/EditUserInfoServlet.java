@@ -9,45 +9,34 @@ import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.DBManager;
 import uts.isd.model.dao.User;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
+@WebServlet("/EditUserInfoServlet")
+public class EditUserInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        DBManager db = (DBManager) session.getAttribute("db");
 
+        DBManager db = (DBManager)session.getAttribute("db");
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String first = req.getParameter("firstName");
-        String last = req.getParameter("lastName");
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String dob = req.getParameter("dob");
         String address = req.getParameter("address");
-        String date = req.getParameter("dob");
-        String name = first + " " + last;
 
-        User user = new User(email, password, first, last, address, date);
 
-        session.setAttribute("loggedInUser", user);
+        User existingUser = (User)session.getAttribute("loggedInUser");
+        User newUser = new User(email, password, firstName, lastName, dob, address);
 
         try {
-            db.addUser(user);
+            db.updateUser(existingUser, newUser);
+            session.setAttribute("loggedInUser", newUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        resp.sendRedirect("fixWelcome.jsp");
-
-        System.out.println("절대경로 확인: " + new File("database/mydb.db").getAbsolutePath());
-
+        resp.sendRedirect("fixIndex.jsp");
     }
 }
