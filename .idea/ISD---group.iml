@@ -17,5 +17,6 @@
         <jarDirectory url="jar://$MODULE_DIR$/ISDtest/src/main/webapp/WEB-INF/lib/sqlite-jdbc-3.42.0.0.jar!/" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
   </component>
 </module>
