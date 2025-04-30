@@ -2,7 +2,7 @@
 <%@ page import="uts.isd.model.dao.User" %>
 
 <%
-    User user = (User) session.getAttribute("user");
+    User user = (User) session.getAttribute("loggedInUser");
 %>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
         <br>
 
         <label for="lastName">Last name:</label>
-        <input  id="lastName" name="lastName" type="text" maxlength="10" pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" value=<%=user.getLastName()%>required>
+        <input  id="lastName" name="lastName" type="text" maxlength="10" pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" value=<%=user.getLastName()%> required>
         <br>
 
         <label for="email">Email:</label>

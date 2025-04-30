@@ -6,7 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import uts.isd.model.dao.DBManager;
+import uts.isd.model.dao.DAO;
+import uts.isd.model.dao.UserDBManager;
 import uts.isd.model.dao.User;
 
 import java.io.IOException;
@@ -20,10 +21,11 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         HttpSession session = req.getSession();
-        DBManager db = (DBManager) session.getAttribute("db");
+        DAO db = (DAO)session.getAttribute("db");
+
 
         try {
-            User user = db.findUser(email, password);
+            User user = db.Users().findUser(email, password);
 
             if (user != null) {
                 session.setAttribute("loggedInUser", user);
