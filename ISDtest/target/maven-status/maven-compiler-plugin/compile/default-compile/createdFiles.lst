@@ -1,0 +1,8 @@
+uts\isd\model\dao\User.class
+uts\isd\controller\DeleteServlet.class
+uts\isd\controller\LoginServlet.class
+uts\isd\controller\EditUserInfoServlet.class
+uts\isd\controller\StartupListener.class
+uts\isd\model\dao\DBConnector.class
+uts\isd\model\dao\DBManager.class
+uts\isd\controller\RegisterServlet.class
