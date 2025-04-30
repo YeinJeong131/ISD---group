@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="uts.isd.model.dao.User" %>
-<%@ page import="uts.isd.model.dao.DBConnector, uts.isd.model.dao.DBManager, java.sql.SQLException" %>
+<%@ page import="uts.isd.model.dao.DBConnector, uts.isd.model.dao.UserDBManager, java.sql.SQLException" %>
+<%@ page import="uts.isd.model.dao.DAO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,8 @@
 <body>
 <%
     User validUser = (User) session.getAttribute("loggedInUser");
-    DBManager db = (DBManager) session.getAttribute("db");
+    DAO db = (DAO)session.getAttribute("db");
+
 
     if (validUser != null) {
 

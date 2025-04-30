@@ -6,7 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import uts.isd.model.dao.DBManager;
+import uts.isd.model.dao.DAO;
+import uts.isd.model.dao.UserDBManager;
 import uts.isd.model.dao.User;
 
 import java.io.IOException;
@@ -18,7 +19,8 @@ public class EditUserInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        DBManager db = (DBManager)session.getAttribute("db");
+
+        DAO db = (DAO)session.getAttribute("db");
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -32,7 +34,7 @@ public class EditUserInfoServlet extends HttpServlet {
         User newUser = new User(email, password, firstName, lastName, dob, address);
 
         try {
-            db.updateUser(existingUser, newUser);
+            db.Users().updateUser(existingUser, newUser);
             session.setAttribute("loggedInUser", newUser);
         } catch (SQLException e) {
             e.printStackTrace();

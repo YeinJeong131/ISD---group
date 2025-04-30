@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import uts.isd.model.dao.DBManager;
+import uts.isd.model.dao.DAO;
+import uts.isd.model.dao.UserDBManager;
 import uts.isd.model.dao.User;
 
 @WebServlet("/RegisterServlet")
@@ -24,7 +25,8 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("🚨 doPost() 진입!");
         HttpSession session = req.getSession();
-        DBManager db = (DBManager) session.getAttribute("db");
+
+        DAO db = ((DAO)req.getSession().getAttribute("db"));
         System.out.println("DBManager is null? " + (db == null));
 
         String email = req.getParameter("email");
@@ -40,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         session.setAttribute("RegisteredUser", user);
 
         try {
-            db.addUser(user);
+            db.Users().addUser(user);
             System.out.println("✅ 사용자 삽입 시도 완료!");
         } catch (SQLException e) {
             e.printStackTrace();
