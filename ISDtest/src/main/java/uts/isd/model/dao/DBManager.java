@@ -12,7 +12,7 @@ public class DBManager {
     }
 
     public int getUserCount() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM user");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM User");
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getInt(1);
@@ -20,7 +20,7 @@ public class DBManager {
 
     //CREATE
     public void addUser(User user) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USER (Email, Password, FirstName, LastName, Address, DateOfBirth) VALUES (?, ?, ?, ?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO User (email, password, firstName, lastName, address, dob) VALUES (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getFirstName());
@@ -45,7 +45,7 @@ public class DBManager {
 
     //UPDATE
     public void updateUser(User user, User newUser) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET Email = ?, Password = ?, FirstName = ?, LastName = ?, Address = ?, DateOfBirth = ? WHERE UserId = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET email = ?, password = ?, firstName = ?, lastName = ?, address = ?, dob = ? WHERE UserId = ?");
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getFirstName());
@@ -59,14 +59,14 @@ public class DBManager {
     //DELETE
     public void removeUser(User user) throws SQLException {
         System.out.println("ID: " + user.getId());
-        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USER WHERE UserId = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USER WHERE userId = ?");
         preparedStatement.setInt(1, user.getId());
         preparedStatement.executeUpdate();
     }
 
     //find user
     public User findUser(String email, String password) throws SQLException {
-        String findingQuery = "SELECT * FROM USERS WHERE email = ? AND password = ?";
+        String findingQuery = "SELECT * FROM User WHERE email = ? AND password = ?";
         PreparedStatement stmt = connection.prepareStatement(findingQuery);
         stmt.setString(1, email);
         stmt.setString(2, password);

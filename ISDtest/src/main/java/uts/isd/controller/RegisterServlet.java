@@ -1,5 +1,9 @@
 package uts.isd.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,11 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.DBManager;
 import uts.isd.model.dao.User;
-
-
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -23,9 +22,10 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("🚨 doPost() 진입!");
         HttpSession session = req.getSession();
         DBManager db = (DBManager) session.getAttribute("db");
-
+        System.out.println("DBManager is null? " + (db == null));
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -37,17 +37,22 @@ public class RegisterServlet extends HttpServlet {
 
         User user = new User(email, password, first, last, address, date);
 
-        session.setAttribute("loggedInUser", user);
+        session.setAttribute("RegisteredUser", user);
 
         try {
             db.addUser(user);
+            System.out.println("✅ 사용자 삽입 시도 완료!");
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("❌ 사용자 삽입 중 오류 발생");
         }
 
-        resp.sendRedirect("fixWelcome.jsp");
+        File dbFile = new File("AssignmentDB.db");
+        System.out.println("📁 실제 사용 중인 DB 절대 경로: " + dbFile.getAbsolutePath());
 
-        System.out.println("절대경로 확인: " + new File("database/mydb.db").getAbsolutePath());
+        resp.sendRedirect(req.getContextPath() + "/fixWelcome.jsp");
+
+
 
     }
 }

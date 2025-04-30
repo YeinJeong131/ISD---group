@@ -18,7 +18,7 @@
 
 
 <%
-    User user = (User) session.getAttribute("loggedInUser");
+    User user = (User) session.getAttribute("RegisteredUser");
     if (user != null) {
 %>
 <div class="center-box">

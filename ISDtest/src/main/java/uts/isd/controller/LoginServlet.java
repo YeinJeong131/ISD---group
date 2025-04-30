@@ -26,15 +26,14 @@ public class LoginServlet extends HttpServlet {
             User user = db.findUser(email, password);
 
             if (user != null) {
-                session.setAttribute("user", user);
+                session.setAttribute("loggedInUser", user);
                 resp.sendRedirect("fixIndex.jsp");
-            } else { resp.sendRedirect("login.jsp?error=1");}
+            } else { resp.sendRedirect("login.jsp?error=true");}
         }
         catch (SQLException | IOException e) {
             e.printStackTrace();
-            resp.sendRedirect("login.jsp?error=1");
+            resp.sendRedirect("login.jsp?error=true");
         }
-
 
     }
 }

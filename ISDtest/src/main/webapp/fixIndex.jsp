@@ -11,10 +11,10 @@
 </head>
 <body>
 <%
-
-    User registeredUser = (User) session.getAttribute("user");
+    User validUser = (User) session.getAttribute("loggedInUser");
     DBManager db = (DBManager) session.getAttribute("db");
-    if (registeredUser != null) {
+
+    if (validUser != null) {
 
 %>
 <div class="navbar">
@@ -23,7 +23,7 @@
         <input type="text" placeholder="Search...">
     </div>
     <div class="nav-icons">
-        <h4>User name: <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%></h4>
+        <h4>User name: <%=validUser.getFirstName()%> <%=validUser.getLastName()%></h4>
         <a href="userInfo.jsp"><img src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
         <form action="/LogoutServlet" method="post">
             <button>Logout</button>
@@ -31,7 +31,7 @@
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
 </div>
-<div class="main-content">Welcome back <%=registeredUser.getFirstName()%> <%=registeredUser.getLastName()%> !</div>
+<div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
 <%
 } else {
     // 用户未登录，显示默认导航栏
