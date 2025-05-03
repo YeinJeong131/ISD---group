@@ -105,6 +105,14 @@
 
       <br>
       <button class="register_button" type="submit">Register</button>
+
+      <% String error = (String) request.getAttribute("errorMessageDuplication"); %>
+      <% if (error != null) { %>
+        <div style="color:red;"><%= error %></div>
+      <% } %>
+
+
+
     </form>
   </div>
 </div>

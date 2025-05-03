@@ -27,6 +27,9 @@ public class RegisterServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         DAO db = ((DAO)session.getAttribute("db"));
+        UserDBManager userDB = db.Users();
+
+
         if (db == null) {
             System.out.println("DAO was null — creating new DAO just in case.");
             try {
@@ -48,22 +51,30 @@ public class RegisterServlet extends HttpServlet {
         String date = req.getParameter("dob");
         String name = first + " " + last;
 
-        User user = new User(email, password, first, last, address, date);
-
-        session.setAttribute("RegisteredUser", user);
-
         try {
-            db.Users().addUser(user);
-            System.out.println("✅ 사용자 삽입 시도 완료!");
+            if(userDB.existingEmail(email)) {
+                req.setAttribute("errorMessageDuplication", "Email already exists.");
+                req.getRequestDispatcher("fixRegister.jsp").forward(req, resp);
+                return;
+            }
+            User user = new User(email, password, first, last, address, date);
+            session.setAttribute("RegisteredUser", user);
+            try {
+                db.Users().addUser(user);
+                System.out.println("✅ 사용자 삽입 시도 완료!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("❌ 사용자 삽입 중 오류 발생");
+            }
+            resp.sendRedirect(req.getContextPath() + "/fixWelcome.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ 사용자 삽입 중 오류 발생");
         }
 
         File dbFile = new File("AssignmentDB.db");
         System.out.println("📁 실제 사용 중인 DB 절대 경로: " + dbFile.getAbsolutePath());
 
-        resp.sendRedirect(req.getContextPath() + "/fixWelcome.jsp");
+
 
 
 

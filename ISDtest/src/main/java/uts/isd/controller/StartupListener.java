@@ -19,10 +19,12 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
     }
 
     public void sessionCreated(HttpSessionEvent se) {
+        System.out.println("✅ sessionCreated() called!");
         HttpSession session = se.getSession();
         try {
             DAO dao = new DAO();
             session.setAttribute("db", dao);
+            System.out.println("✅ DAO successfully saved in session");
         }
         catch (SQLException e) {
             System.out.println("Could not connect to database");

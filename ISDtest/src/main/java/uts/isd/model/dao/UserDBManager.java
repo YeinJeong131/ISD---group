@@ -98,7 +98,8 @@ public class UserDBManager extends DBManager<User> {
                     rs.getString("firstName"),
                     rs.getString("lastName"),
                     rs.getString("address"),
-                    rs.getString("dob")
+                    rs.getString("dob"),
+                    rs.getInt("userId")
             );
         }
         else { return null;}

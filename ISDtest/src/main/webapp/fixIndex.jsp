@@ -31,6 +31,9 @@
             <button>Logout</button>
         </form>
         <a href="cart.jsp" class="cart-text">Cart</a>
+        <form action="/AccessLogServlet" method="get">
+            <button type="submit">View Login Record</button>
+        </form>
     </div>
 </div>
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
