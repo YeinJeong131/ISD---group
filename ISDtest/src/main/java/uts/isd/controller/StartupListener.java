@@ -18,7 +18,6 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
         System.out.println("contextInitialized");
     }
 
-    @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
         try {

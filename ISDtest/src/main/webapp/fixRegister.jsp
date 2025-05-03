@@ -7,7 +7,7 @@
 <body>
 <div class="register_parent_container">
   <div class="title">
-    <h2>Registeration form</h2>
+    <h2>Registration form</h2>
   </div>
   <div class="content">
     <form action="/RegisterServlet" method="post">

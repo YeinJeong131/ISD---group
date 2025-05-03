@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
                 resp.sendRedirect("fixIndex.jsp");
             } else { resp.sendRedirect("login.jsp?error=true");}
         }
-        catch (SQLException | IOException e) {
+        catch (SQLException e) {
             e.printStackTrace();
             resp.sendRedirect("login.jsp?error=true");
         }
