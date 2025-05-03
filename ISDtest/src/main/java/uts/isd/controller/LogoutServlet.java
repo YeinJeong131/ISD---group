@@ -13,8 +13,11 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("loggedInUser");
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.removeAttribute("loggedInUser");
+            session.invalidate();
+        }
         resp.sendRedirect("fixIndex.jsp");
     }
 }

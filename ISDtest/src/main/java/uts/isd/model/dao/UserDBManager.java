@@ -10,22 +10,24 @@ public class UserDBManager extends DBManager<User> {
 
     @Override
     protected User add(User object) throws SQLException {
-        return null;
+        addUser(object);
+        return object;
     }
 
     @Override
     protected User get(User object) throws SQLException {
         return null;
+
     }
 
     @Override
     protected void update(User oldObject, User newObject) throws SQLException {
-
+        updateUser(oldObject, newObject);
     }
 
     @Override
     protected void delete(User object) throws SQLException {
-
+        removeUser(object);
     }
 
     public int getUserCount() throws SQLException {
@@ -101,4 +103,14 @@ public class UserDBManager extends DBManager<User> {
         }
         else { return null;}
     }
+
+    public boolean existingEmail(String email) throws SQLException {
+        String findingQuery = "SELECT * FROM User WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(findingQuery);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        return rs.next();
+    }
+
+
 }

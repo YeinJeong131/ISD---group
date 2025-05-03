@@ -26,7 +26,18 @@ public class RegisterServlet extends HttpServlet {
         System.out.println("🚨 doPost() 진입!");
         HttpSession session = req.getSession();
 
-        DAO db = ((DAO)req.getSession().getAttribute("db"));
+        DAO db = ((DAO)session.getAttribute("db"));
+        if (db == null) {
+            System.out.println("DAO was null — creating new DAO just in case.");
+            try {
+                db = new DAO();
+                session.setAttribute("db", db);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
         System.out.println("DBManager is null? " + (db == null));
 
         String email = req.getParameter("email");

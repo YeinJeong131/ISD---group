@@ -32,4 +32,15 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("contextDestroyed");
     }
+
+    public void sessionDestroyed(HttpSessionEvent se) {
+        System.out.println("sessionDestroyed");
+        HttpSession session = se.getSession();
+        DAO db = (DAO) session.getAttribute("db");
+
+        if (db != null) {
+            db.close();
+        }
+        System.out.println("DB connection closed on session destroy.");
+    }
 }

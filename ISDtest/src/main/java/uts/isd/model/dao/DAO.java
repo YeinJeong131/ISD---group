@@ -6,10 +6,13 @@ import java.util.ArrayList;
 
 public class DAO {
     ArrayList<UserDBManager> tables;
+    private DBConnector connector;
+    private Connection connection;
 
     public DAO() throws SQLException {
         tables = new ArrayList<>();
-        Connection connection = new DBConnector().getConnection();
+        connector = new DBConnector();
+        connection = connector.getConnection();
         try {
             tables.add(new UserDBManager(connection));
         }
@@ -20,6 +23,10 @@ public class DAO {
 
     public UserDBManager Users() {
         return (UserDBManager) tables.get(0);
+    }
+
+    public void close() {
+        connector.closeConnection();
     }
 
 }
