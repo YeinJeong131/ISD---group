@@ -67,4 +67,45 @@ public class LogDBManager extends DBManager<AccessLog>{
         statement.executeUpdate();
     }
 
+    public List<AccessLog> getLogsPaginated(int userId, int offset, int limitPlusOne) throws SQLException {
+        List<AccessLog> oneUserLogs = new ArrayList<>();
+        String query = "SELECT * FROM AccessLog WHERE userID = ? ORDER BY loginTime DESC LIMIT ? OFFSET ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        statement.setInt(2, limitPlusOne);
+        statement.setInt(3, offset);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            AccessLog findedLog = new AccessLog();
+            findedLog.setLogId(resultSet.getInt("logId"));
+            findedLog.setUserId(resultSet.getInt("userId"));
+            findedLog.setLoginTime(resultSet.getString("loginTime"));
+            findedLog.setLogoutTime(resultSet.getString("logoutTime"));
+            oneUserLogs.add(findedLog);
+        }
+        return oneUserLogs;
+    }
+
+    public List<AccessLog> getLogsByDatePaginated(int userId, String date, int offset, int limitPlusOne) throws SQLException {
+        List<AccessLog> oneUserLogs = new ArrayList<>();
+        String query = "SELECT * FROM AccessLog WHERE userID = ? AND DATE(loginTime) = ? ORDER BY loginTime DESC LIMIT ? OFFSET ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        statement.setString(2, date);
+        statement.setInt(3, limitPlusOne);
+        statement.setInt(4, offset);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            AccessLog findedLog = new AccessLog();
+            findedLog.setLogId(resultSet.getInt("logId"));
+            findedLog.setUserId(resultSet.getInt("userId"));
+            findedLog.setLoginTime(resultSet.getString("loginTime"));
+            findedLog.setLogoutTime(resultSet.getString("logoutTime"));
+            oneUserLogs.add(findedLog);
+        }
+        return oneUserLogs;
+    }
+
+
+
 }
