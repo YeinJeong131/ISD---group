@@ -21,8 +21,55 @@
       <br>
 
       <label for="email">Email:</label>
-      <input  id="email" name="email" type="email" required>
+      <input  id="email" name="email" type="email" required oninput="checkExistingEmail()"/>
+      <div id="error-message" class="error-message"></div>
       <br>
+          <script>
+            function checkExistingEmail() {
+              console.log("checkExistingEmail called.");
+              const email = document.getElementById("email").value;
+              const errorMessage = document.getElementById("error-message");
+              const checkAvailabilityButton = document.getElementById("checkAvailability");
+
+              if (email.length < 5) {
+                errorMessage.innerText = "";
+                errorMessage.style.display = "none";
+                checkAvailabilityButton.disabled = true;
+                return;
+              }
+
+              fetch("/EmailErrorServlet?email=" + encodeURIComponent(email))
+                      .then(response => {
+                        console.log("Server response: " + response.status);
+                        return response.text();
+                      })
+                      .then(data => {
+                        console.log("Server response: " + data);
+                        data = data.trim();
+
+                        if (data === "existing email") {
+                          errorMessage.innerText = "This email is already registered. Use a different email.";
+                          errorMessage.style.display = "block";
+                          checkAvailabilityButton.disabled = true;
+                        } else if (data === "can use this email") {
+                          errorMessage.innerText = "Valid email address.";
+                          errorMessage.style.display = "block";
+                          checkAvailabilityButton.disabled = false;
+                        } else {
+                          errorMessage.innerText = "It is unavailable to check email now. Please try again later.";
+                          errorMessage.style.display = "block";
+                          checkAvailabilityButton.disabled = true;
+                        }
+                      })
+                      .catch(error => {
+                        console.log("Fail to check email: " + error);
+                        errorMessage.innerText = "network error.";
+                        errorMessage.style.display = "block";
+                        checkAvailabilityButton.disabled = true;
+                      })
+
+            }
+          </script>
 
       <label for="password">Password:</label>
       <input id="password" name="password" type="password" required
@@ -35,18 +82,8 @@
       <br>
 
       <label for="dob">Date of Birth:</label>
-      <input  id="dob" name="dob" type="text" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" placeholder="DDMMYYYY" required
-              title="Enter your date of birth in DDMMYYYY format">
+      <input  id="dob" name="dob" type="date"  required>
       <br>
-      <script>
-        document.getElementById("dob").addEventListener("input", function(e) {
-          e.target.value=e.target.value
-                  .replace(/\D/g, "")
-                  .replace(/^(\d{2})(\d)/, "$1/$2")
-                  .replace(/^(\d{2})\/(\d{2})(\d)/, "$1/$2/$3")
-                  .slice(0,10);
-        });
-      </script>
 
       <label for="paymentMethod">Payment Method:</label>
       <select id="paymentMethod" name="paymentMethod" required onchange="togglePaymentDetails()">
@@ -104,13 +141,7 @@
       </div>
 
       <br>
-      <button class="register_button" type="submit">Register</button>
-
-      <% String error = (String) request.getAttribute("errorMessageDuplication"); %>
-      <% if (error != null) { %>
-        <div style="color:red;"><%= error %></div>
-      <% } %>
-
+      <button class="register_button" type="submit" id="checkAvailability" disabled>Register</button>
 
 
     </form>

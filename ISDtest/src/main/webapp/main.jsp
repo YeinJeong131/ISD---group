@@ -11,7 +11,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /*//david*/
+
         }
         .profile-icon {
             width: 30px;

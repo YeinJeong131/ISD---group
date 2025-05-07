@@ -247,4 +247,8 @@ body {
     text-align: center;
 }
 
+.error-message:empty {
+    display: none !important;
+}
+
 

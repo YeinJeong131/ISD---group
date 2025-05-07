@@ -2,37 +2,11 @@
 <html>
 <head><title>My login record</title></head>
 <body>
-<%--    <h2>My login record</h2>--%>
-<%--    <table border="1">--%>
-<%--        <tr>--%>
-<%--            <th>Log ID</th>--%>
-<%--            <th>Login Time</th>--%>
-<%--            <th>Logout Time</th>--%>
-<%--        </tr>--%>
-<%--    --%>
-<%--        <c:forEach items="${logs}" var="log">--%>
-<%--            <tr>--%>
-<%--                <td>${log.logId}</td>--%>
-<%--                <td>${log.loginTime}</td>--%>
-<%--                <td>--%>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${empty log.logoutTime}">--%>
-<%--                            Not Logged Out--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            ${log.logoutTime}--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
-
     <h2>My login record</h2>
 
     <form action="AccessLogServlet" method="get">
         <label>Search by date: </label>
-        <input type="date" name="searchingDate" value="${searchingDate}"/>
+        <input type="date" name="selectedDate" value="${selectedDate}"/>
         <button type="submit">Search</button>
     </form>
 
@@ -66,12 +40,12 @@
     </table>
 
     <div>
-        <c:if test="${page > 1}">
-            <a href="AccessLogServlet?page=${page-1}&searchingDate=${searchingDate}">Previous</a>
+        <c:if test="${currentPage > 1}">
+            <a href="AccessLogServlet?requestedPage=${currentPage-1}&selectedDate=${selectedDate}">Previous</a>
         </c:if>
-        &nbsp;&nbsp;Page ${page}&nbsp;&nbsp;
+        &nbsp;&nbsp;Page ${currentPage}&nbsp;&nbsp;
         <c:if test="${hasNextPage}">
-            <a href="AccessLogServlet?page=${page+1}&searchingDate=${searchingDate}">Next</a>
+            <a href="AccessLogServlet?requestedPage=${currentPage+1}&selectedDate=${selectedDate}">Next</a>
         </c:if>
     </div>
     <a href="fixIndex.jsp">Back to Home</a>

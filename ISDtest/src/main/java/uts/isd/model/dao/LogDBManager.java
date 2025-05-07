@@ -13,16 +13,6 @@ public class LogDBManager extends DBManager<AccessLog>{
         super(connection);
     }
 
-    @Override
-    protected AccessLog add(AccessLog object) throws SQLException {
-        return null;
-    }
-
-    @Override
-    protected AccessLog get(AccessLog object) throws SQLException {
-        return null;
-
-    }
 
     public List<AccessLog> getLogsByID(int userId) throws SQLException{
         List<AccessLog> oneUserLogs = new ArrayList<>();
@@ -43,10 +33,6 @@ public class LogDBManager extends DBManager<AccessLog>{
     }
 
 
-    @Override
-    protected void update(AccessLog oldObject, AccessLog newObject) throws SQLException {
-
-    }
 
     public void insertLoginLog(int userId) throws SQLException {
         String query = "INSERT INTO AccessLog (userId, loginTime, logoutTime) VALUES (?, datetime('now'), NULL)";
@@ -55,10 +41,6 @@ public class LogDBManager extends DBManager<AccessLog>{
         statement.executeUpdate();
     }
 
-    @Override
-    protected void delete(AccessLog object) throws SQLException {
-
-    }
 
     public void updateLogoutTime(int userId) throws SQLException {
         String query = "UPDATE AccessLog SET logoutTime = datetime('now') WHERE userId = ? AND logoutTime IS NULL";
@@ -67,13 +49,13 @@ public class LogDBManager extends DBManager<AccessLog>{
         statement.executeUpdate();
     }
 
-    public List<AccessLog> getLogsPaginated(int userId, int offset, int limitPlusOne) throws SQLException {
+    public List<AccessLog> getLogsPaginated(int userId, int startingLog, int logsToFetch) throws SQLException {
         List<AccessLog> oneUserLogs = new ArrayList<>();
         String query = "SELECT * FROM AccessLog WHERE userID = ? ORDER BY loginTime DESC LIMIT ? OFFSET ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, userId);
-        statement.setInt(2, limitPlusOne);
-        statement.setInt(3, offset);
+        statement.setInt(2, logsToFetch);
+        statement.setInt(3, startingLog);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             AccessLog findedLog = new AccessLog();
@@ -86,14 +68,14 @@ public class LogDBManager extends DBManager<AccessLog>{
         return oneUserLogs;
     }
 
-    public List<AccessLog> getLogsByDatePaginated(int userId, String date, int offset, int limitPlusOne) throws SQLException {
+    public List<AccessLog> getLogsByDatePaginated(int userId, String date, int startingLog, int logsToFetch) throws SQLException {
         List<AccessLog> oneUserLogs = new ArrayList<>();
         String query = "SELECT * FROM AccessLog WHERE userID = ? AND DATE(loginTime) = ? ORDER BY loginTime DESC LIMIT ? OFFSET ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, userId);
         statement.setString(2, date);
-        statement.setInt(3, limitPlusOne);
-        statement.setInt(4, offset);
+        statement.setInt(3, logsToFetch);
+        statement.setInt(4, startingLog);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             AccessLog findedLog = new AccessLog();

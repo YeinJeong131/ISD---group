@@ -18,48 +18,53 @@ import java.util.List;
 
 @WebServlet("/AccessLogServlet")
 public class AccessLogServlet extends HttpServlet {
-    private static final int PAGE_SIZE = 3;
+    private static final int LOGS_PER_PAGE = 3;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        if (session == null) {
+            System.out.println("AccessLogServlet: No session found");
+            return;
+        }
         User user = (User) session.getAttribute("loggedInUser");
+
         DAO db = (DAO) session.getAttribute("db");
-        if (user == null || db == null) {
-            response.sendRedirect("login.jsp");
+        if (db == null) {
+            System.out.println("AccessLogServlet: No database session found");
             return;
         }
 
-        String searchingDate = request.getParameter("searchingDate");
-        int page = 1;
-        String pageParam = request.getParameter("page");
-        if (pageParam != null && !pageParam.isEmpty()) {
+        String selectedDate = request.getParameter("selectedDate");
+        int currentPage = 1;
+        String requestedPage = request.getParameter("requestedPage");
+        if (requestedPage != null && !requestedPage.isEmpty()) {
             try {
-                page = Integer.parseInt(pageParam);
+                currentPage = Integer.parseInt(requestedPage);
             } catch (NumberFormatException e) {
-                System.err.println("Invalid page number format: " + pageParam);
+                System.err.println("Invalid page number format: " + requestedPage);
             }
         }
 
-        int offset = (page -1) * PAGE_SIZE;
-        int fetchSize = PAGE_SIZE + 1;
+        int startingLog = (currentPage -1) * LOGS_PER_PAGE ;
+        int logsToFetch = LOGS_PER_PAGE  + 1;
 
         List<AccessLog> logs;
         try {
-            if (searchingDate != null && !searchingDate.isEmpty()) {
-                logs = db.Logs().getLogsByDatePaginated(user.getId(), searchingDate, offset, fetchSize);
-                request.setAttribute("searchingDate", searchingDate);
+            if (selectedDate != null && !selectedDate.isEmpty()) {
+                logs = db.Logs().getLogsByDatePaginated(user.getId(), selectedDate, startingLog, logsToFetch);
+                request.setAttribute("selectedDate", selectedDate);
             } else {
-                logs= db.Logs().getLogsPaginated(user.getId(), offset, fetchSize);
+                logs= db.Logs().getLogsPaginated(user.getId(), startingLog, logsToFetch);
             }
         } catch (SQLException e) {
             throw new ServletException(e);
         }
 
-        boolean hasNextPage = logs.size() > PAGE_SIZE;
-        if (hasNextPage) logs.remove(PAGE_SIZE);
+        boolean hasNextPage = logs.size() > LOGS_PER_PAGE ;
+        if (hasNextPage) logs.remove(LOGS_PER_PAGE); // Remove the extra last log used to check for the existence of the next page.
 
         request.setAttribute("logs", logs);
-        request.setAttribute("page", page);
+        request.setAttribute("currentPage", currentPage);
         request.setAttribute("hasNextPage", hasNextPage);
         request.getRequestDispatcher("viewLog.jsp").forward(request, response);
 
@@ -68,35 +73,3 @@ public class AccessLogServlet extends HttpServlet {
 
     }
 }
-//public class AccessLogServlet extends HttpServlet {
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//
-//        User loggedInUser = (User)session.getAttribute("loggedInUser");
-//        DAO db = (DAO)session.getAttribute("db");
-//        if (db == null) {
-//            System.out.println("⚠️ db was null in AccessLogServlet, creating manually");
-//            try {
-//                db = new DAO(); // 예외적으로 만들게요.
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//            session.setAttribute("db", db);
-//        }
-//        if (loggedInUser == null || db == null) {
-//            response.sendRedirect("login.jsp");
-//            return;
-//        }
-//
-//        try {
-//            LogDBManager logDB = db.Logs();
-//            List<AccessLog> logs = logDB.getLogsByID(loggedInUser.getId());
-//            request.setAttribute("logs", logs);
-//            System.out.println("✅ AccessLog size: " + logs.size());
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("viewLog.jsp");
-//            dispatcher.forward(request, response);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-//}

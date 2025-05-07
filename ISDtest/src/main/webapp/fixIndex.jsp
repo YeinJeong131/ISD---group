@@ -39,7 +39,7 @@
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
 <%
 } else {
-    // 用户未登录，显示默认导航栏
+
 %>
 <div class="navbar">
     <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
@@ -61,7 +61,7 @@
 <%
     }
 %>
-<!-- 保留原有消息处理逻辑 -->
+
 <%
     String message = request.getParameter("message");
     if ("logout".equals(message)) {
