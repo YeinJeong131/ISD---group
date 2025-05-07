@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Register</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="registerStyle3.css">
 </head>
 <body>
 <div class="register_parent_container">
