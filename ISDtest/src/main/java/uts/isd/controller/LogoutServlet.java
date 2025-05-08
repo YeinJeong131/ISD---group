@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
             if (user != null && logDB != null) {
                 try {
                     logDB.updateLogoutTime(user.getId());
-                    System.out.println("📌 Logout time recorded for user ID: " + user.getId());
+                    System.out.println("Logout time is now recorded -> user ID: " + user.getId());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -33,9 +33,9 @@ public class LogoutServlet extends HttpServlet {
 
             session.removeAttribute("loggedInUser");
             session.invalidate();
-            System.out.println("✅ Logout successful - session invalidated");
+            System.out.println("Logout successful - session invalidated");
         }
-        else {System.out.println("⚠️ No active session to invalidate");}
+        else {System.out.println("No active session to invalidate");}
         resp.sendRedirect("fixIndex.jsp");
 
     }

@@ -19,7 +19,7 @@ public class DBConnector {
         try {
             connection = DriverManager.getConnection(url);
             connection.setAutoCommit(true);
-            System.out.println("Connected to database");
+            System.out.println("DBConnector: Connected to database");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -34,7 +34,7 @@ public class DBConnector {
         try {
             if (connection != null) {
                 connection.close();
-                System.out.println("Connection closed");
+                System.out.println("DBConnector: Connection closed");
             }
         }
         catch (SQLException e) {
