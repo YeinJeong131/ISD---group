@@ -33,19 +33,11 @@
         <form action="/LogoutServlet" method="post" style="margin: 0;">
             <button type="submit" class="logout-button">Logout</button>
         </form>
-<<<<<<< HEAD
-        // converting cart text to image
         <a href="cart.jsp" class="cart-icon">
             <img src = "cart.png" alt="Cart">
         </a>
-        <form action="/AccessLogServlet" method="get">
-            <button type="submit">View Login Record</button>
-        </form>
-=======
-        <a href="cart.jsp" class="cart-text">Cart</a>
         <a href="/AccessLogServlet">View Login Record</a>
 
->>>>>>> 3513df2dc8a78747c40451ac34755051a3544240
     </div>
 </div>
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
