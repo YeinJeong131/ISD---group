@@ -7,8 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.DAO;
-import uts.isd.model.dao.UserDBManager;
-import uts.isd.model.dao.User;
+import uts.isd.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,6 +27,6 @@ public class DeleteServlet extends HttpServlet {
             System.out.format("Failed to delete user %s from the database", user.getEmail());
         }
         session.removeAttribute("loggedInUser");
-        resp.sendRedirect("fixIndex.jsp");
+        resp.sendRedirect("index.jsp");
     }
 }

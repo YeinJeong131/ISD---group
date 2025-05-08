@@ -1,5 +1,7 @@
 package uts.isd.model.dao;
 
+import uts.isd.model.User;
+
 import java.sql.*;
 
 public class UserDBManager extends DBManager<User> {
@@ -39,16 +41,15 @@ public class UserDBManager extends DBManager<User> {
 
     //CREATE
     public void addUser(User user) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO User (email, password, firstName, lastName, address, dob) VALUES (?, ?, ?, ?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO User (email, password, firstName, lastName, address, dob, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, user.getEmail());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getFirstName());
         preparedStatement.setString(4, user.getLastName());
         preparedStatement.setString(5, user.getAddress());
         preparedStatement.setString(6, user.getDateOfBirth());
-
+        preparedStatement.setInt(7, user.getRole());
         preparedStatement.executeUpdate();
-
         ResultSet keys = preparedStatement.getGeneratedKeys();
         if (keys.next()) {
             int id = keys.getInt(1);
@@ -56,7 +57,6 @@ public class UserDBManager extends DBManager<User> {
         } else {
             System.out.println("failed to add user");
         }
-
     }
 
     //READ
@@ -64,21 +64,22 @@ public class UserDBManager extends DBManager<User> {
 
     //UPDATE
     public void updateUser(User user, User newUser) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET email = ?, password = ?, firstName = ?, lastName = ?, address = ?, dob = ? WHERE UserId = ?");
-        preparedStatement.setString(1, user.getEmail());
-        preparedStatement.setString(2, user.getPassword());
-        preparedStatement.setString(3, user.getFirstName());
-        preparedStatement.setString(4, user.getLastName());
-        preparedStatement.setString(5, user.getAddress());
-        preparedStatement.setString(6, user.getDateOfBirth());
-        preparedStatement.setInt(7, user.getId());
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET email = ?, password = ?, firstName = ?, lastName = ?, address = ?, dob = ?, role = ? WHERE id = ?");
+        preparedStatement.setString(1, newUser.getEmail());
+        preparedStatement.setString(2, newUser.getPassword());
+        preparedStatement.setString(3, newUser.getFirstName());
+        preparedStatement.setString(4, newUser.getLastName());
+        preparedStatement.setString(5, newUser.getAddress());
+        preparedStatement.setString(6, newUser.getDateOfBirth());
+        preparedStatement.setInt(7, newUser.getRole());
+        preparedStatement.setInt(8, user.getId());
         preparedStatement.executeUpdate();
     }
 
     //DELETE
     public void removeUser(User user) throws SQLException {
         System.out.println("ID: " + user.getId());
-        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USER WHERE userId = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USER WHERE id = ?");
         preparedStatement.setInt(1, user.getId());
         preparedStatement.executeUpdate();
     }
@@ -90,7 +91,6 @@ public class UserDBManager extends DBManager<User> {
         stmt.setString(1, email);
         stmt.setString(2, password);
         ResultSet rs = stmt.executeQuery();
-
         if (rs.next()) {
             return new User(
                     rs.getString("email"),
@@ -99,7 +99,8 @@ public class UserDBManager extends DBManager<User> {
                     rs.getString("lastName"),
                     rs.getString("address"),
                     rs.getString("dob"),
-                    rs.getInt("userId")
+                    rs.getInt("id"),
+                    rs.getInt("role")
             );
         }
         else { return null;}

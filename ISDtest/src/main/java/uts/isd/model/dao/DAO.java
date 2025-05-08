@@ -15,7 +15,7 @@ public class DAO {
         connection = connector.getConnection();
         try {
             tables.add(new UserDBManager(connection));
-            tables.add(new LogDBManager(connection));
+            tables.add(new DeviceDBManager(connection));
         }
         catch (SQLException ex) {
             System.out.println("Error initializing DBManagers");
@@ -26,8 +26,8 @@ public class DAO {
         return (UserDBManager) tables.get(0);
     }
 
-    public LogDBManager Logs() {
-        return (LogDBManager) tables.get(1);
+    public DeviceDBManager Devices() {
+        return (DeviceDBManager) tables.get(1);
     }
 
     public void close() {

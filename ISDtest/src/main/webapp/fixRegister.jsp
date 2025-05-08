@@ -48,6 +48,13 @@
         });
       </script>
 
+      <label for="role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="0">Customer</option>
+        <option value="1">Staff</option>
+      </select>
+      <br>
+
       <label for="paymentMethod">Payment Method:</label>
       <select id="paymentMethod" name="paymentMethod" required onchange="togglePaymentDetails()">
         <option value="">Select a method</option>
@@ -105,14 +112,6 @@
 
       <br>
       <button class="register_button" type="submit">Register</button>
-
-      <% String error = (String) request.getAttribute("errorMessageDuplication"); %>
-      <% if (error != null) { %>
-        <div style="color:red;"><%= error %></div>
-      <% } %>
-
-
-
     </form>
   </div>
 </div>

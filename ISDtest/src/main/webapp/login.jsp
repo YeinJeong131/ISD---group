@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="uts.isd.model.dao.User" %>
+<%@ page import="uts.isd.model.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@
 <div class="login_parent_container">
     <h2>Login</h2>
     <% if (request.getParameter("error") != null) { %>
-        <H3>Invalid email or password.</H3>
+    <H3>Invalid email or password.</H3>
     <% } %>
 
     <form action="/LoginServlet" method="post">

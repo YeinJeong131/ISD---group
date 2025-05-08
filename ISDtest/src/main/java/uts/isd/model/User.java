@@ -1,4 +1,4 @@
-package uts.isd.model.dao;
+package uts.isd.model;
 
 import java.io.Serializable;
 
@@ -11,22 +11,24 @@ public class User implements Serializable {
     private String dateOfBirth;
     private String fullName;
     private int id;
+    private int role; // 0: customer, 1: staff
 
     // 기본 생성자
     public User() {}
 
     // 모든 필드를 받는 생성자 (필요 시)
-    public User(String email, String password, String firstName, String lastName, String address, String dateOfBirth) {
+    public User(String email, String password, String firstName, String lastName, String address, String dateOfBirth,int role) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
+        this.role = role;
     }
 
-    public User(String email, String password, String firstName, String lastName, String address, String dateOfBirth, int id) {
-        this(email, password, firstName, lastName, address, dateOfBirth);
+    public User(String email, String password, String firstName, String lastName, String address, String dateOfBirth, int id, int role) {
+        this(email, password, firstName, lastName, address, dateOfBirth,role);
         this.id = id;
     }
 
@@ -96,5 +98,13 @@ public class User implements Serializable {
 
     public String getFullName() {
         return fullName != null ? fullName : firstName + " " + lastName;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

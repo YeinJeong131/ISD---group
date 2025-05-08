@@ -7,8 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.DAO;
-import uts.isd.model.dao.UserDBManager;
-import uts.isd.model.dao.User;
+import uts.isd.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,10 +27,10 @@ public class EditUserInfoServlet extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String dob = req.getParameter("dob");
         String address = req.getParameter("address");
-
+        int role = Integer.parseInt(req.getParameter("role"));
 
         User existingUser = (User)session.getAttribute("loggedInUser");
-        User newUser = new User(email, password, firstName, lastName, dob, address);
+        User newUser = new User(email, password, firstName, lastName, dob, address,role);
 
         try {
             db.Users().updateUser(existingUser, newUser);

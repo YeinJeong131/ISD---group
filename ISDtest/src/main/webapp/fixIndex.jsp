@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="uts.isd.model.dao.User" %>
+<%@ page import="uts.isd.model.User" %>
 <%@ page import="uts.isd.model.dao.DBConnector, uts.isd.model.dao.UserDBManager, java.sql.SQLException" %>
 <%@ page import="uts.isd.model.dao.DAO" %>
 
@@ -27,19 +27,16 @@
     <div class="nav-icons">
         <h4>User name: <%=validUser.getFirstName()%> <%=validUser.getLastName()%></h4>
         <a href="userInfo.jsp"><img src="userimage.jpg" alt="USER" style="width: 60px; height: 60px; border-radius: 50%;"/></a>
+        <a href="/device/" class="nav-button">Products</a>
         <form action="/LogoutServlet" method="post">
             <button>Logout</button>
         </form>
         <a href="cart.jsp" class="cart-text">Cart</a>
-        <form action="/AccessLogServlet" method="get">
-            <button type="submit">View Login Record</button>
-        </form>
     </div>
 </div>
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
 <%
 } else {
-    // 用户未登录，显示默认导航栏
 %>
 <div class="navbar">
     <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
@@ -49,6 +46,7 @@
     <div class="nav-icons">
         <a href="fixRegister.jsp">Register</a>
         <a href="login.jsp">Login</a>
+        <a href="/device/" class="nav-button">Products</a>
         <a href="cart.jsp" class="cart-text">Cart</a>
     </div>
 </div>
@@ -61,7 +59,7 @@
 <%
     }
 %>
-<!-- 保留原有消息处理逻辑 -->
+
 <%
     String message = request.getParameter("message");
     if ("logout".equals(message)) {

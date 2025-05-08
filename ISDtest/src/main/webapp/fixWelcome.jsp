@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="uts.isd.model.dao.User" %>
+<%@ page import="uts.isd.model.User" %>
 
 <!DOCTYPE html>
 <html>
