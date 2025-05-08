@@ -30,7 +30,10 @@
         <form action="/LogoutServlet" method="post">
             <button>Logout</button>
         </form>
-        <a href="cart.jsp" class="cart-text">Cart</a>
+        // converting cart text to image
+        <a href="cart.jsp" class="cart-icon">
+            <img src = "cart.png" alt="Cart">
+        </a>
         <form action="/AccessLogServlet" method="get">
             <button type="submit">View Login Record</button>
         </form>
@@ -39,7 +42,7 @@
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
 <%
 } else {
-    // 用户未登录，显示默认导航栏
+
 %>
 <div class="navbar">
     <div class="logo"><span>IoT</span><span class="bay"> BaY</span></div>
@@ -49,7 +52,9 @@
     <div class="nav-icons">
         <a href="fixRegister.jsp">Register</a>
         <a href="login.jsp">Login</a>
-        <a href="cart.jsp" class="cart-text">Cart</a>
+        <a href="cart.jsp" class="cart-icon">
+            <img src = "cart.png" alt="Cart">
+        </a>
     </div>
 </div>
 <div class="main-content">
