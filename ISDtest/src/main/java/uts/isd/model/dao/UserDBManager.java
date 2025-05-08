@@ -8,27 +8,6 @@ public class UserDBManager extends DBManager<User> {
         super(connection);
     }
 
-    @Override
-    protected User add(User object) throws SQLException {
-        addUser(object);
-        return object;
-    }
-
-    @Override
-    protected User get(User object) throws SQLException {
-        return null;
-
-    }
-
-    @Override
-    protected void update(User oldObject, User newObject) throws SQLException {
-        updateUser(oldObject, newObject);
-    }
-
-    @Override
-    protected void delete(User object) throws SQLException {
-        removeUser(object);
-    }
 
     public int getUserCount() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM User");
@@ -63,16 +42,17 @@ public class UserDBManager extends DBManager<User> {
     //...
 
     //UPDATE
-    public void updateUser(User user, User newUser) throws SQLException {
+    public void updateUser(User newUser) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET email = ?, password = ?, firstName = ?, lastName = ?, address = ?, dob = ? WHERE UserId = ?");
-        preparedStatement.setString(1, user.getEmail());
-        preparedStatement.setString(2, user.getPassword());
-        preparedStatement.setString(3, user.getFirstName());
-        preparedStatement.setString(4, user.getLastName());
-        preparedStatement.setString(5, user.getAddress());
-        preparedStatement.setString(6, user.getDateOfBirth());
-        preparedStatement.setInt(7, user.getId());
-        preparedStatement.executeUpdate();
+        preparedStatement.setString(1, newUser.getEmail());
+        preparedStatement.setString(2, newUser.getPassword());
+        preparedStatement.setString(3, newUser.getFirstName());
+        preparedStatement.setString(4, newUser.getLastName());
+        preparedStatement.setString(5, newUser.getAddress());
+        preparedStatement.setString(6, newUser.getDateOfBirth());
+        preparedStatement.setInt(7, newUser.getId());
+        int rows = preparedStatement.executeUpdate();
+        System.out.println("Rows affected: " + rows);
     }
 
     //DELETE
@@ -105,13 +85,13 @@ public class UserDBManager extends DBManager<User> {
         else { return null;}
     }
 
-    public boolean existingEmail(String email) throws SQLException {
-        String findingQuery = "SELECT * FROM User WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(findingQuery);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        return rs.next();
-    }
 
+    public boolean doesEmailExist(String email) throws SQLException {
+        String findingQuery = "SELECT * FROM User WHERE email = ?";
+        PreparedStatement statement = connection.prepareStatement(findingQuery);
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.next();
+    }
 
 }

@@ -247,6 +247,7 @@ body {
     text-align: center;
 }
 
+<<<<<<< HEAD
 .cart-icon {
     position: relative;
 }
@@ -292,6 +293,10 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+=======
+.error-message:empty {
+    display: none !important;
+>>>>>>> 3513df2dc8a78747c40451ac34755051a3544240
 }
 
 

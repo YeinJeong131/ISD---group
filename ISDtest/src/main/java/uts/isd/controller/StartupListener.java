@@ -15,33 +15,33 @@ import java.sql.SQLException;
 @WebListener
 public class StartupListener implements ServletContextListener, HttpSessionListener {
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("contextInitialized");
+        System.out.println("StartupListener: contextInitialized");
     }
 
     public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("✅ sessionCreated() called!");
+        System.out.println("✅ StartupListener: sessionCreated() called!");
         HttpSession session = se.getSession();
         try {
             DAO dao = new DAO();
             session.setAttribute("db", dao);
-            System.out.println("✅ DAO successfully saved in session");
+            System.out.println("✅ StartupListener: DAO successfully saved in session");
         }
         catch (SQLException e) {
             System.out.println("Could not connect to database");
         }
     }
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("contextDestroyed");
+        System.out.println("StartupListener: contextDestroyed");
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("sessionDestroyed");
+        System.out.println("StartupListener: sessionDestroyed");
         HttpSession session = se.getSession();
         DAO db = (DAO) session.getAttribute("db");
 
         if (db != null) {
             db.close();
         }
-        System.out.println("DB connection closed on session destroy.");
+        System.out.println("StartupListener: DB connection closed on session destroy.");
     }
 }

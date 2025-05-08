@@ -1,0 +1,174 @@
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #555;
+    color: white;
+    font-size: 18pt;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 30pt;
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+.logo span:first-child {
+    color: lightgreen;
+}
+.logo .bay {
+    color: white;
+}
+
+.search-bar {
+    flex: 2;
+    margin: 0 60px 0 30px;
+}
+.search-bar input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16pt;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-icons a,
+.logout-button {
+    background-color: #444;
+    color: white;
+    font-size: 14pt;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    display: inline-block;
+}
+
+.nav-icons a:hover,
+.logout-button:hover {
+    background-color: lightgreen;
+    color: #333;
+}
+
+.nav-icons img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.nav-icons .user-info-box a {
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+.nav-icons .user-info-box a:hover {
+    background-color: transparent !important;
+}
+
+
+.user-info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    text-align: center;
+
+}
+.user-info-box img {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+
+    position: relative;
+    left: -10px;
+}
+.user-info-box img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(144, 238, 144, 0.6);
+    border-color: lightgreen;
+}
+.user-info-box .user-name {
+    font-size: 12px;
+    color: white;
+    margin-top: 6px;
+}
+
+
+.main-content {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 22pt;
+    color: white;
+}
+
+.main-content-section {
+    background-color: rgba(102, 102, 102, 0.85);
+    padding: 40px 30px;
+    margin: 30px auto;
+    width: 450px;
+    border-radius: 12px;
+    border: 2px solid #888;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+.main-content-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+.main-content-section p {
+    font-size: 20pt;
+    margin: 20px 0 10px;
+    font-weight: bold;
+}
+.main-content-section button {
+    margin-top: 10px;
+    padding: 14px 50px;
+    font-size: 18pt;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.main-content-section button:hover {
+    background-color: lightgreen;
+    color: #222;
+}
+
+

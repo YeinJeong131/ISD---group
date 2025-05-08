@@ -5,31 +5,36 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loginStyle2.css">
 </head>
 <body>
 <div class="login_parent_container">
-    <h2>Login</h2>
+    <div class="login_title">Login</div>
     <% if (request.getParameter("error") != null) { %>
-        <H3>Invalid email or password.</H3>
+        <div class="error-message">Invalid email or password.</div>
     <% } %>
 
     <form action="/LoginServlet" method="post">
-        <label class="login_label" for="email">Email:</label>
-        <input id="email" name="email" type="email" required>
-        <br><br>
+        <div class="login_form_group">
+            <label class="login_label" for="email">Email:</label>
+            <input id="email" name="email" type="email" required class="login_input">
 
-        <label class="login_label" for="password">Password:</label>
-        <input id="password" name="password" type="password" required
-               pattern="(?=.*\d)(?=.*[A-Z])(?=.*[\W]).{11,}"
-               title="Must be at least 12 characters long, including at least 1 uppercase letter, 1 special character, and 1 number">
-        <br><br>
+        </div>
+
+        <div class="login_form_group">
+            <label class="login_label" for="password">Password:</label>
+            <input class="login_input" id="password" name="password" type="password" required
+                   pattern="(?=.*\d)(?=.*[A-Z])(?=.*[\W]).{11,}"
+                   title="Must be at least 12 characters long, including at least 1 uppercase letter, 1 special character, and 1 number">
+
+        </div>
+
 
         <button class="login_button" type="submit">Login</button>
     </form>
 
-    <p>Don't have an account?</p>
-    <button onclick="location.href='fixRegister.jsp'">Register</button>
+    <div class="login_link_text">Don't have an account?</div>
+    <button class="login_register_button" onclick="location.href='fixRegister.jsp'">Register</button>
 
 
 </div>
