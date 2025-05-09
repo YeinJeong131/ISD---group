@@ -121,9 +121,14 @@
         </c:forEach>
         </tbody>
     </table>
-    <form action="fixIndex.jsp">
-        <button class="info_button" method="get">Back to Home</button>
-    </form>
+    <div class="search-section">
+            <form action="fixIndex.jsp" method="get">
+                <button class="info_button" type="submit">Back to Home</button>
+            </form>
+            <form action="cart.jsp" method="get">
+                <button class="info_button" type="submit">Cart</button>
+            </form>
+        </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
