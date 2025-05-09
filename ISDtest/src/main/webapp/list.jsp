@@ -74,7 +74,7 @@
 
     <%-- 判空 --%>
     <c:if test="${empty devices}">
-        <div style="color:orange;">设备列表为空或加载失败。</div>
+        <div style="color:orange;">failed or the list is empty</div>
     </c:if>
 
     <div class="search-section">
