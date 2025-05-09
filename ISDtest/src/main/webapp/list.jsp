@@ -74,7 +74,7 @@
 
     <%-- 判空 --%>
     <c:if test="${empty devices}">
-        <div style="color:orange;">设备列表为空或加载失败。</div>
+        <div style="color:orange;">failed or the list is empty</div>
     </c:if>
 
     <div class="search-section">
@@ -122,13 +122,13 @@
         </tbody>
     </table>
     <div class="search-section">
-        <form action="fixIndex.jsp" method="get">
-            <button class="info_button" type="submit">Back to Home</button>
-        </form>
-        <form action="cart.jsp" method="get">
-            <button class="info_button" type="submit">Cart</button>
-        </form>
-    </div>
+            <form action="fixIndex.jsp" method="get">
+                <button class="info_button" type="submit">Back to Home</button>
+            </form>
+            <form action="cart.jsp" method="get">
+                <button class="info_button" type="submit">Cart</button>
+            </form>
+        </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
