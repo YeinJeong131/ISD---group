@@ -10,6 +10,13 @@ public class UserDBManager extends DBManager<User> {
         super(connection);
     }
 
+    public boolean doesEmailExist(String email) throws SQLException {
+        String findingQuery = "SELECT * FROM User WHERE email = ?";
+        PreparedStatement statement = connection.prepareStatement(findingQuery);
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.next();
+    }
     @Override
     protected User add(User object) throws SQLException {
         addUser(object);

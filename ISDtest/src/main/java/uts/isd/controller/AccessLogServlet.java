@@ -1,6 +1,5 @@
 package uts.isd.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,8 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.AccessLog;
 import uts.isd.model.dao.DAO;
-import uts.isd.model.dao.LogDBManager;
-import uts.isd.model.dao.User;
+import uts.isd.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;

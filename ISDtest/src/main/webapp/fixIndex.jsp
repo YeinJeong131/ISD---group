@@ -48,6 +48,7 @@
         <a href="login.jsp">Login</a>
         <a href="/device/" class="nav-button">Products</a>
         <a href="cart.jsp" class="cart-text">Cart</a>
+        <a href="/AccessLogServlet">View Login Record</a>
     </div>
 </div>
 <div class="main-content">

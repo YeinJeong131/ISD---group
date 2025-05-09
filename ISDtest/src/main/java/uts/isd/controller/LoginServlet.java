@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import uts.isd.model.dao.DAO;
+import uts.isd.model.dao.LogDBManager;
 import uts.isd.model.User;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,6 +35,9 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     session.setAttribute("userRole", "customer");
                 }
+                LogDBManager logDB = db.Logs();
+                logDB.insertLoginLog(user.getId());
+
                 resp.sendRedirect("fixIndex.jsp");
             } else { resp.sendRedirect("login.jsp?error=true");}
         }
