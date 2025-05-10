@@ -52,11 +52,52 @@
             border-radius: 4px;
             margin-bottom: 20px;
         }
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .top-cart-inside {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-image {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: red;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
+
+
 <div class="container">
-    <h2>IoT Products</h2>
+    <div class="container-header">
+        <h2>IoT Products</h2>
+        <div class="top-cart-inside">
+            <a href="${pageContext.request.contextPath}/cart.jsp">
+                <img src="${pageContext.request.contextPath}/cart.png" alt="Cart" class="cart-image">
+                <span class="cart-count">${sessionScope.cart != null ? sessionScope.cart.size() : 0}</span>
+            </a>
+        </div>
+    </div>
 
     <%-- 错误信息显示 --%>
     <c:if test="${not empty error}">
@@ -132,11 +173,8 @@
         </tbody>
     </table>
     <div class="search-section">
-            <form action="fixIndex.jsp" method="get">
+            <form action="/fixIndex.jsp" method="get">
                 <button class="info_button" type="submit">Back to Home</button>
-            </form>
-            <form action="cart.jsp" method="get">
-                <button class="info_button" type="submit">Cart</button>
             </form>
         </div>
 </div>

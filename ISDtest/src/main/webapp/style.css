@@ -460,4 +460,24 @@ th, td {
     border-radius: 50%;
     font-weight: bold;
 }
+.top-cart {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top-cart a {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-image {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
 

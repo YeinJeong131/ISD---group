@@ -23,33 +23,44 @@ public class AddToCartServlet extends HttpServlet {
 
         try {
             Device device = db.Devices().getDeviceById(deviceId);
+
+            // out of stock or diff ID
             if (device == null || device.getQuantity() <= 0) {
-                session.setAttribute("error", "Device unavailable or out of stock.");
-                response.sendRedirect("device/");
+                session.setAttribute("error", "This product is out of stock.");
+                response.sendRedirect(request.getHeader("referer")); // 사용자가 있던 페이지로 되돌림
                 return;
             }
 
+            // call cart from session
             List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
             if (cart == null) cart = new ArrayList<>();
 
             boolean found = false;
             for (CartItem item : cart) {
                 if (item.getDeviceId() == deviceId) {
+                    // validate quantity
+                    if (item.getQuantity() + 1 > device.getQuantity()) {
+                        session.setAttribute("error", "Not enough stock available.");
+                        response.sendRedirect(request.getHeader("referer"));
+                        return;
+                    }
                     item.incrementQuantity();
                     found = true;
                     break;
                 }
             }
 
+            // not in cart
             if (!found) {
                 cart.add(new CartItem(device.getId(), device.getName(), device.getPrice()));
             }
 
             session.setAttribute("cart", cart);
-            response.sendRedirect(request.getContextPath() + "/cart.jsp");
+            response.sendRedirect(request.getHeader("referer"));
+
         } catch (Exception e) {
-            session.setAttribute("error", "Error adding device to cart.");
-            response.sendRedirect("device/");
+            session.setAttribute("error", "An error occurred while adding the product to the cart.");
+            response.sendRedirect(request.getHeader("referer"));
         }
     }
 }
