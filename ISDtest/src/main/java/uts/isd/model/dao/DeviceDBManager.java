@@ -114,6 +114,15 @@ public class DeviceDBManager extends DBManager<Device> {
         return preparedStatement.executeUpdate() > 0;
     }
 
+    public void updateDeviceQuantity(int deviceId, int quantityChange) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE devices SET quantity = quantity + ? WHERE id = ?"
+        );
+        preparedStatement.setInt(1, quantityChange);
+        preparedStatement.setInt(2, deviceId);
+        preparedStatement.executeUpdate();
+    }
+
     //DELETE
     public Boolean removeDevice(Device device) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM devices WHERE id = ?");

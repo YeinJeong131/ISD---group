@@ -115,7 +115,17 @@
                         <a href="${pageContext.request.contextPath}/device/edit?id=${device.id}" class="btn btn-sm btn-warning">Edit</a>
                         <a href="${pageContext.request.contextPath}/device/delete?id=${device.id}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
                     </c:if>
-                    <a href="${pageContext.request.contextPath}/cart.jsp?deviceId=${device.id}" class="btn btn-sm btn-success">Add to Cart</a>
+                    <c:choose>
+                        <c:when test="${device.quantity > 0}">
+                            <form method="post" action="${pageContext.request.contextPath}/cart/add" style="display:inline;">
+                                <input type="hidden" name="deviceId" value="${device.id}">
+                                <button type="submit" class="btn btn-sm btn-success">Add to Cart</button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-sm btn-secondary" disabled>Out of Stock</button>
+                        </c:otherwise>
+                    </c:choose>
                 </td>
             </tr>
         </c:forEach>

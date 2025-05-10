@@ -24,9 +24,15 @@
     <li class="info_li"><strong>Date of Birth:</strong> <%= user.getDateOfBirth() %></li>
 </ul>
 
-<form action="fixIndex.jsp">
-    <button class="info_button" method="get">Back to Home</button>
-</form>
+<div class="button-container">
+    <form action="fixIndex.jsp" class="inline-form">
+        <button class="info_button" type="submit">Back to Home</button>
+    </form>
+
+    <form action="orderHistory.jsp" class="inline-form">
+        <button class="info_button" type="submit">View Order History</button>
+    </form>
+</div>
 
 
 <%

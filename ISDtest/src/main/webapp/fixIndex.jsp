@@ -31,7 +31,11 @@
         <form action="/LogoutServlet" method="post">
             <button>Logout</button>
         </form>
-        <a href="cart.jsp" class="cart-text">Cart</a>
+        <a href="/AccessLogServlet">View Login Record</a>
+        <a href="cart.jsp" class="cart-icon" style="position: relative;">
+            <img src="cart.png" alt="Cart">
+            <span class="cart-count">${sessionScope.cart != null ? sessionScope.cart.size() : 0}</span>
+        </a>
     </div>
 </div>
 <div class="main-content">Welcome back <%=validUser.getFirstName()%> <%=validUser.getLastName()%> !</div>
@@ -47,7 +51,10 @@
         <a href="fixRegister.jsp">Register</a>
         <a href="login.jsp">Login</a>
         <a href="/device/" class="nav-button">Products</a>
-        <a href="cart.jsp" class="cart-text">Cart</a>
+        <a href="cart.jsp" class="cart-icon" style="position: relative;">
+            <img src="cart.png" alt="Cart">
+            <span class="cart-count">${sessionScope.cart != null ? sessionScope.cart.size() : 0}</span>
+        </a>
     </div>
 </div>
 <div class="main-content">

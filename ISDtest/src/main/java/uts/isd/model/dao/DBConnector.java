@@ -15,7 +15,7 @@ public class DBConnector {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        String url = "jdbc:sqlite:/Users/startistsky/Downloads/ISDtest/AssignmentDB.db";
+        String url = "jdbc:sqlite:C:/Users/inhoo/.SmartTomcat/ISD---group/ISD---group/AssignmentDB.db";
         try {
             connection = DriverManager.getConnection(url);
             connection.setAutoCommit(true);

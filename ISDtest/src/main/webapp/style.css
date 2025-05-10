@@ -239,7 +239,6 @@ body {
     background-color: lightgreen;
     color: #333;
     padding: 12px 24px;
-    margin-left: 525px;
     margin-bottom: 200px;
     border-radius: 4px;
     border: none;
@@ -262,4 +261,203 @@ body {
     text-decoration: none;
 }
 
+.cart-container {
+    margin: 30px auto;
+    max-width: 1000px;
+    background-color: #777;
+    padding: 30px;
+    border-radius: 8px;
+    color: white;
+}
+
+.cart-table {
+    width: 100%;
+    background-color: white;
+    color: #333;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-table th, .cart-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.cart-table th {
+    background-color: #f0f0f0;
+}
+
+.empty-cart {
+    color: #ffcccc;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.total-price {
+    margin-top: 20px;
+    color: lightgreen;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.btn-order {
+    background-color: lightgreen;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-order:hover {
+    background-color: #90EE90;
+}
+
+
+ body {
+     background-color: #555;
+     color: white;
+     font-family: Arial, sans-serif;
+     font-size: 16pt;
+     margin: 0;
+     padding: 0;
+ }
+
+.confirmation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.confirmation-container h1 {
+    color: lightgreen;
+    margin-bottom: 20px;
+}
+
+.confirmation-container p {
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+}
+
+.button-group form {
+    display: inline-block;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 14pt;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-proceed {
+    background-color: lightgreen;
+    color: #333;
+}
+
+.button-cancel {
+    background-color: #ff4444;
+    color: white;
+}
+
+.button-back {
+    background-color: #aaa;
+    color: #333;
+}
+
+.button-group button:hover {
+    opacity: 0.9;
+}
+
+ body {
+     background-color: #555;
+     color: white;
+     font-family: Arial, sans-serif;
+     padding: 40px;
+ }
+
+h2 {
+    color: lightgreen;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #eee;
+    color: #333;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.filter-form {
+    margin-bottom: 20px;
+}
+
+.filter-form input {
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.filter-form button {
+    padding: 5px 15px;
+    background: lightgreen;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.back-button {
+    margin-top: 20px;
+    background: #999;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.inline-form {
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+}
 
