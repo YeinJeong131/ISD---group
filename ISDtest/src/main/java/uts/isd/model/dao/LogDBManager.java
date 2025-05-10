@@ -14,6 +14,26 @@ public class LogDBManager extends DBManager<AccessLog>{
         super(connection);
     }
 
+    @Override
+    protected AccessLog add(AccessLog object) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected AccessLog get(AccessLog object) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected void update(AccessLog oldObject, AccessLog newObject) throws SQLException {
+
+    }
+
+    @Override
+    protected void delete(AccessLog object) throws SQLException {
+
+    }
+
 
     public List<AccessLog> getLogsByID(int userId) throws SQLException{
         List<AccessLog> oneUserLogs = new ArrayList<>();
@@ -32,8 +52,6 @@ public class LogDBManager extends DBManager<AccessLog>{
         }
         return oneUserLogs;
     }
-
-
 
     public void insertLoginLog(int userId) throws SQLException {
         String query = "INSERT INTO AccessLog (userId, loginTime, logoutTime) VALUES (?, datetime('now'), NULL)";
