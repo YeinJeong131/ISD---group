@@ -106,52 +106,6 @@ public class LogDBManager extends DBManager<AccessLog>{
         }
         return oneUserLogs;
     }
-    public AccessLog add(AccessLog log) throws SQLException {
-        String query = "INSERT INTO AccessLog (userId, loginTime, logoutTime) VALUES (?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, log.getUserId());
-        statement.setString(2, log.getLoginTime());
-        statement.setString(3, log.getLogoutTime());
-        statement.executeUpdate();
-        return log;
-    }
-
-    @Override
-    public AccessLog get(AccessLog log) throws SQLException {
-        String query = "SELECT * FROM AccessLog WHERE logId = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, log.getLogId());
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            AccessLog result = new AccessLog();
-            result.setLogId(rs.getInt("logId"));
-            result.setUserId(rs.getInt("userId"));
-            result.setLoginTime(rs.getString("loginTime"));
-            result.setLogoutTime(rs.getString("logoutTime"));
-            return result;
-        }
-        return null;
-    }
-
-    @Override
-    public void update(AccessLog oldLog, AccessLog newLog) throws SQLException {
-        String query = "UPDATE AccessLog SET userId = ?, loginTime = ?, logoutTime = ? WHERE logId = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, newLog.getUserId());
-        statement.setString(2, newLog.getLoginTime());
-        statement.setString(3, newLog.getLogoutTime());
-        statement.setInt(4, oldLog.getLogId());
-        statement.executeUpdate();
-    }
-
-    @Override
-    public void delete(AccessLog log) throws SQLException {
-        String query = "DELETE FROM AccessLog WHERE logId = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, log.getLogId());
-        statement.executeUpdate();
-    }
-
 
 
 }

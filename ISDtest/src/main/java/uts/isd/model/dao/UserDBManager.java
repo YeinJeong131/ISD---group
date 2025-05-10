@@ -113,13 +113,6 @@ public class UserDBManager extends DBManager<User> {
         else { return null;}
     }
 
-    public boolean doesEmailExist(String email) throws SQLException {
-        String findingQuery = "SELECT * FROM User WHERE email = ?";
-        PreparedStatement statement = connection.prepareStatement(findingQuery);
-        statement.setString(1, email);
-        ResultSet resultSet = statement.executeQuery();
-        return resultSet.next();
-    }
 
 
 }
