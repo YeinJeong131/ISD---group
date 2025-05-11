@@ -32,8 +32,10 @@ public class LoginServlet extends HttpServlet {
             if (user != null) {
                 session.setAttribute("loggedInUser", user);
 
+                System.out.println("Login successful - user ID: " + user.getId());
+
                 LogDBManager logDB = db.Logs();
-                logDB.insertLoginLog(user.getId());
+                System.out.println("Login time is now recorded -> user ID: " + user.getId());
 
                 resp.sendRedirect("fixIndex.jsp");
             } else { resp.sendRedirect("login.jsp?error=true");}

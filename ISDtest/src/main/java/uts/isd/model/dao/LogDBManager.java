@@ -1,9 +1,8 @@
 package uts.isd.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import uts.isd.model.AccessLog;
@@ -57,7 +56,11 @@ public class LogDBManager extends DBManager<AccessLog>{
         String query = "INSERT INTO AccessLog (userId, loginTime, logoutTime) VALUES (?, datetime('now'), NULL)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, userId);
+
         statement.executeUpdate();
+
+        System.out.println("Inserted log");
+
     }
 
 

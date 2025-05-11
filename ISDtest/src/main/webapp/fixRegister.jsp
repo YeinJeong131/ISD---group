@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Register</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="registerStyle3.css">
 </head>
 <body>
 <div class="register_parent_container">
@@ -159,7 +159,7 @@
       </div>
 
       <br>
-      <button class="register_button" type="submit">Register</button>
+      <button class="register_button" type="submit" id="checkAvailability">Register</button>
     </form>
   </div>
 </div>

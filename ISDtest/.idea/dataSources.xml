@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="AssignmentDB.db" uuid="a13a3597-df9c-4444-b740-9cd809d210da">
+    <data-source source="LOCAL" name="AssignmentDB.db" uuid="993308a5-874e-415f-8b00-e55719b6e8f1">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$USER_HOME$/.SmartTomcat/ISD---group/ISD---group/AssignmentDB.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/.SmartTomcat/ISDtest/ISDtest/AssignmentDB.db</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
       </jdbc-additional-properties>

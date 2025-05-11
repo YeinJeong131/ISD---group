@@ -10,6 +10,8 @@ import uts.isd.model.dao.DAO;
 import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.UserDBManager;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @WebListener
@@ -42,4 +44,7 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
         }
         System.out.println("DB connection closed on session destroy.");
     }
+
+
+
 }
