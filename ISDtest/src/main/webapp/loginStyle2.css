@@ -1,12 +1,11 @@
-/* ===== 전체 페이지 배경 및 폰트 설정 ===== */
+
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #555;  /* 어두운 회색 배경 */
+    background-color: #555;
     color: white;
 }
 
-/* ===== 로그인 박스 외부 컨테이너 ===== */
 .login_parent_container {
     width: 420px;
     margin: 100px auto;
@@ -17,27 +16,23 @@ body {
     text-align: center;
 }
 
-/* ===== 로그인 제목 ===== */
 .login_title {
     font-size: 36pt;
     font-weight: bold;
-    color: #90ee90;  /* 연초록 */
+    color: #90ee90;
     margin-bottom: 30px;
 }
 
-/* ===== 입력 그룹 간 간격 ===== */
 .login_form_group {
     margin-bottom: 18px;
 }
 
-/* ===== 입력 필드 라벨 ===== */
 .login_label {
     display: block;
     font-size: 13pt;
     margin-bottom: 6px;
 }
 
-/* ===== 입력 필드 스타일 ===== */
 .login_input {
     width: 100%;
     max-width: 220px;
@@ -65,7 +60,6 @@ body {
     outline: none;
 }
 
-/* ===== 로그인 버튼 ===== */
 .login_button {
     margin-top: 16px;
     padding: 10px 26px;
@@ -85,7 +79,6 @@ body {
     transform: scale(1.03);
 }
 
-/* ===== 하단 문구 ===== */
 .login_link_text {
     margin-top: 20px;
     font-size: 12pt;
@@ -93,7 +86,6 @@ body {
     line-height: 1.4;
 }
 
-/* ===== Register 버튼 ===== */
 .login_register_button {
     margin-top: 6px;
     padding: 6px 16px;
@@ -113,7 +105,7 @@ body {
     transform: scale(1.02);
 }
 .error-message {
-    color: #ff4d4d;  /* 진한 붉은색 */
+    color: #ff4d4d;
     font-size: 12.5pt;
     font-weight: 500;
     background-color: rgba(0, 0, 0, 0.15);

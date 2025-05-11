@@ -6,7 +6,6 @@ body {
     font-size: 16pt;
 }
 
-/* 좌우 2단 배치 */
 .user-info-page {
     display: flex;
     justify-content: center;
@@ -17,7 +16,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* 왼쪽 보기용 정보 */
 .user-info-display {
     width: 400px;
     background-color: rgba(255, 255, 255, 0.04);
@@ -44,7 +42,6 @@ body {
     border-bottom: 1px solid #aaa;
 }
 
-/* 오른쪽 수정용 폼 */
 .user-info-edit {
     width: 460px;
     background-color: rgba(255, 255, 255, 0.04);
@@ -97,7 +94,6 @@ body {
     transform: scale(1.03);
 }
 
-/* 삭제 버튼 별도 여백 */
 .user-info-edit form + div button {
     margin-top: 16px;
     background-color: #ff4d4d;
@@ -108,7 +104,6 @@ body {
     background-color: #cc0000;
 }
 
-/* 하단 중앙 버튼 영역 */
 .user-info-buttons {
     display: flex;
     justify-content: center;
@@ -134,7 +129,6 @@ body {
     color: white;
 }
 
-/* 선택적으로 폼을 가로로 정렬할 경우 */
 .inline-form {
     display: inline-block;
 }
