@@ -70,7 +70,8 @@ public class EditUserInfoServlet extends HttpServlet {
 
         try {
             db.Users().updateUser(existingUser, newUser);
-            session.setAttribute("loggedInUser", newUser);
+            User updatedUser = db.Users().findUser(email, password);
+            session.setAttribute("loggedInUser", updatedUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }

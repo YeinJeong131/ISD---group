@@ -27,6 +27,6 @@ public class DeleteServlet extends HttpServlet {
             System.out.format("Failed to delete user %s from the database", user.getEmail());
         }
         session.removeAttribute("loggedInUser");
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("fixIndex.jsp");
     }
 }
