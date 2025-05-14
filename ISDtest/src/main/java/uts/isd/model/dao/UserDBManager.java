@@ -80,7 +80,8 @@ public class UserDBManager extends DBManager<User> {
         preparedStatement.setString(6, newUser.getDateOfBirth());
         preparedStatement.setInt(7, newUser.getRole());
         preparedStatement.setInt(8, user.getId());
-        preparedStatement.executeUpdate();
+        int rows = preparedStatement.executeUpdate();
+        System.out.println("Rows affected: " + rows);
     }
 
     //DELETE

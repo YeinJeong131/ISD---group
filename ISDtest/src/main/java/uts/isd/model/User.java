@@ -66,11 +66,11 @@ public class User implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void setName(String firstName, String lastName){
-        this.fullName = firstName + " " + lastName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+//    public void setName(String firstName, String lastName){
+//        this.fullName = firstName + " " + lastName;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//    }
 
     public String getAddress() {
         return address;

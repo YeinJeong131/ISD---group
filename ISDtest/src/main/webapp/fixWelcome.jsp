@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="welcomeStyle.css">
     <meta charset="UTF-8">
     <title>Welcome to IoT Bay</title>
 </head>
@@ -31,6 +31,7 @@
     </div>
 </div>
 
+<% } else { %>
 <div class="center-box">
     <h2>You failed to register in IoTBay</h2>
     <button><a href="fixRegister.jsp">Register again</a></button>

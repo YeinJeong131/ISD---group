@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("🚨 doPost() 진입!");
+        System.out.println("RegisterServlet: doPost() triggered");
         HttpSession session = req.getSession();
 
         DAO db = ((DAO)session.getAttribute("db"));
@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
         String last = req.getParameter("lastName");
         String address = req.getParameter("address");
         String date = req.getParameter("dob");
-        String name = first + " " + last;
+//        String name = first + " " + last;
         int role = Integer.parseInt(req.getParameter("role"));
 
         User user = new User(email, password, first, last, address, date, role);
@@ -53,14 +53,14 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             db.Users().addUser(user);
-            System.out.println("✅ 사용자 삽입 시도 완료!");
+            System.out.println("✅  Successfully inserted user!");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ 사용자 삽입 중 오류 발생");
+            System.out.println("❌ Failed to insert new user.");
         }
 
         File dbFile = new File("AssignmentDB.db");
-        System.out.println("📁 실제 사용 중인 DB 절대 경로: " + dbFile.getAbsolutePath());
+        System.out.println("📁 The absolute path of the database currently in use: " + dbFile.getAbsolutePath());
 
         resp.sendRedirect(req.getContextPath() + "/fixWelcome.jsp");
 

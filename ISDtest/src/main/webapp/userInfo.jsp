@@ -21,6 +21,7 @@
             <li class="info_li"><strong>Email:</strong> <%= user.getEmail() %></li>
             <li class="info_li"><strong>Address:</strong> <%= user.getAddress() %></li>
             <li class="info_li"><strong>Date of Birth:</strong> <%= user.getDateOfBirth() %></li>
+            <li class="info_li"><strong>Role:</strong> <%= user.getRole() == 0 ? "Customer" : "Staff" %></li>
         </ul>
     </div>
     <div class="user-info-edit">
@@ -49,8 +50,19 @@
             <br>
 
             <label for="dob">Date of Birth:</label>
-            <input  id="dob" name="dob" type="date" >
+            <input  id="dob" name="dob" type="date" value="<%= user.getDateOfBirth() %>">
             <br>
+
+
+            <%
+                int selectedRole = user.getRole();
+            %>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="0" <%= selectedRole == 0 ? "selected" : "" %> >Customer</option>
+                <option value="1" <%= selectedRole == 1 ? "selected" : "" %> >Staff</option>
+            </select>
             <button type="submit">Update your Information</button>
         </form>
 

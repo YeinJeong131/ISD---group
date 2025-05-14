@@ -52,14 +52,23 @@ public class LogDBManager extends DBManager<AccessLog>{
         return oneUserLogs;
     }
 
-    public void insertLoginLog(int userId) throws SQLException {
+    public boolean insertLoginLog(int userId) throws SQLException {
         String query = "INSERT INTO AccessLog (userId, loginTime, logoutTime) VALUES (?, datetime('now'), NULL)";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, userId);
-
-        statement.executeUpdate();
-
-        System.out.println("Inserted log");
+//        PreparedStatement statement = connection.prepareStatement(query);
+//        statement.setInt(1, userId);
+//
+//        statement.executeUpdate();
+//
+//        System.out.println("Inserted log");
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, userId);
+            int result = statement.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println(" insertLoginLog() error: " + e.getMessage());
+            return false;
+        }
 
     }
 

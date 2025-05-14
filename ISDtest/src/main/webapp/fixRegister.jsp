@@ -83,18 +83,8 @@
       <br>
 
       <label for="dob">Date of Birth:</label>
-      <input  id="dob" name="dob" type="text" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" placeholder="DDMMYYYY" required
-              title="Enter your date of birth in DDMMYYYY format">
+      <input  id="dob" name="dob" type="date"  required>
       <br>
-      <script>
-        document.getElementById("dob").addEventListener("input", function(e) {
-          e.target.value=e.target.value
-                  .replace(/\D/g, "")
-                  .replace(/^(\d{2})(\d)/, "$1/$2")
-                  .replace(/^(\d{2})\/(\d{2})(\d)/, "$1/$2/$3")
-                  .slice(0,10);
-        });
-      </script>
 
       <label for="role">Role:</label>
       <select id="role" name="role" required>

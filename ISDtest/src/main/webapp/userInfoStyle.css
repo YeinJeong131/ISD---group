@@ -132,3 +132,26 @@ body {
 .inline-form {
     display: inline-block;
 }
+.user-info-edit select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14pt;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #333;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><path fill="%23333" d="M0 0l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 10px 5px;
+}
+
+.user-info-edit select:focus {
+    border-color: lightgreen;
+    outline: none;
+    box-shadow: 0 0 6px rgba(144, 238, 144, 0.4);
+}

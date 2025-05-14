@@ -35,7 +35,13 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("Login successful - user ID: " + user.getId());
 
                 LogDBManager logDB = db.Logs();
-                System.out.println("Login time is now recorded -> user ID: " + user.getId());
+                boolean inserted = logDB.insertLoginLog(user.getId());
+
+                if (inserted) {
+                    System.out.println("Login time is now recorded -> user ID: " + user.getId());
+                } else {
+                    System.out.println("Failed to record login time for user ID: " + user.getId());
+                }
 
                 resp.sendRedirect("fixIndex.jsp");
             } else { resp.sendRedirect("login.jsp?error=true");}
