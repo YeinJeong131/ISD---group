@@ -11,8 +11,9 @@
 <body>
 <div class="cart-container">
 
-  // display an error message when cart is empty
-  <% String error = (String) session.getAttribute("error");
+  <%-- display error message from server --%>
+  <%
+    String error = (String) session.getAttribute("error");
     if (error != null) {
   %>
   <div class="alert alert-danger"><%= error %></div>
@@ -25,13 +26,13 @@
 
   <%
     List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-    if (cart == null || cart.isEmpty()) {
-  %>
-  <p class="empty-cart">Your cart is empty.</p>
-  <%
-  } else {
     double total = 0;
+    boolean cartIsEmpty = (cart == null || cart.isEmpty());
   %>
+
+  <% if (cartIsEmpty) { %>
+  <p class="empty-cart">Your cart is empty.</p>
+  <% } else { %>
   <table class="cart-table">
     <thead>
     <tr>
@@ -64,13 +65,13 @@
   </table>
 
   <h3 class="total-price">Total: $<%= String.format("%.2f", total) %></h3>
+  <% } %>
+
 
   <form method="post" action="order/place">
     <button type="submit" class="btn-order">Place Order</button>
   </form>
-  <%
-    }
-  %>
+
   <br><br>
   <a href="device/" class="btn btn-secondary">Back to Device List</a>
 </div>
