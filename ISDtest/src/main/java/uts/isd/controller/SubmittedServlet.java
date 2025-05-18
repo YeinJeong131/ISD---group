@@ -2,22 +2,18 @@ package uts.isd.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
+import jakarta.servlet.http.*;
 import uts.isd.model.CartItem;
 import uts.isd.model.User;
 import uts.isd.model.dao.DAO;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.List;
 
-@WebServlet("/order/cancel")
-public class CancelOrderServlet extends HttpServlet {
-
+@WebServlet("/order/submit")
+public class SubmittedServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,7 +24,7 @@ public class CancelOrderServlet extends HttpServlet {
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 
         if (cart == null || cart.isEmpty()) {
-            session.setAttribute("error", "Your cart is empty. Nothing to cancel.");
+            session.setAttribute("error", "Your cart is empty.");
             response.sendRedirect(request.getContextPath() + "/cart.jsp");
             return;
         }
@@ -37,36 +33,38 @@ public class CancelOrderServlet extends HttpServlet {
             Connection conn = dao.getConnection();
             PreparedStatement ps;
 
-            // cancelled status
+            // calculate total price
+            BigDecimal totalAmount = BigDecimal.ZERO;
+            for (CartItem item : cart) {
+                totalAmount = totalAmount.add(item.getTotal());
+            }
+
+            // save order in table
             if (user != null) {
                 ps = conn.prepareStatement(
-                        "INSERT INTO orders (user_id, order_date, status, total_amount) VALUES (?, datetime('now'), 'cancelled', ?)",
+                        "INSERT INTO orders (user_id, order_date, status, total_amount) VALUES (?, datetime('now'), 'submitted', ?)",
                         Statement.RETURN_GENERATED_KEYS
                 );
                 ps.setInt(1, user.getId());
+                ps.setBigDecimal(2, totalAmount);
             } else {
                 ps = conn.prepareStatement(
-                        "INSERT INTO orders (order_date, status, total_amount) VALUES (datetime('now'), 'cancelled', ?)",
+                        "INSERT INTO orders (order_date, status, total_amount) VALUES (datetime('now'), 'submitted', ?)",
                         Statement.RETURN_GENERATED_KEYS
                 );
+                ps.setBigDecimal(1, totalAmount);
             }
 
-            // calculate total price
-            java.math.BigDecimal total = java.math.BigDecimal.ZERO;
-            for (CartItem item : cart) {
-                total = total.add(item.getTotal());
-            }
-            ps.setBigDecimal(user != null ? 2 : 1, total);
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            int orderId = rs.getInt(1); // new order ID
+            int orderId = rs.getInt(1);
 
-            // save order items
+            // save items
             PreparedStatement itemPS = conn.prepareStatement(
                     "INSERT INTO order_items (order_id, device_id, quantity, price) VALUES (?, ?, ?, ?)"
             );
+
             for (CartItem item : cart) {
                 itemPS.setInt(1, orderId);
                 itemPS.setInt(2, item.getDeviceId());
@@ -75,15 +73,15 @@ public class CancelOrderServlet extends HttpServlet {
                 itemPS.executeUpdate();
             }
 
-            // remove used sessions
-            session.removeAttribute("cart");
-            session.removeAttribute("latestOrderId");
+            // save in session
+            session.setAttribute("latestOrderId", orderId);
 
-            response.sendRedirect(request.getContextPath() + "/cart.jsp");
+            // direct to payment page
+            response.sendRedirect(request.getContextPath() + "/payment.jsp");
 
         } catch (Exception e) {
-            session.setAttribute("error", "Failed to cancel order: " + e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/confirm.jsp");
+            session.setAttribute("error", "Failed to submit order: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/cart.jsp");
         }
     }
 }

@@ -22,34 +22,23 @@
 
     if (orderIdParam != null && !orderIdParam.trim().isEmpty()) {
       ps = conn.prepareStatement(
-              "SELECT o.id, o.order_date, o.status, " +
-                      "IFNULL(SUM(oi.price * oi.quantity), 0) AS total_price " +
-                      "FROM orders o " +
-                      "LEFT JOIN order_items oi ON o.id = oi.order_id " +
-                      "WHERE o.user_id = ? AND o.id = ? " +
-                      "GROUP BY o.id ORDER BY o.order_date DESC"
+              "SELECT id, order_date, status, total_amount " +
+                      "FROM orders WHERE user_id = ? AND id = ? ORDER BY order_date DESC"
       );
       ps.setInt(1, user.getId());
       ps.setInt(2, Integer.parseInt(orderIdParam));
     } else if (startDate != null && endDate != null && !startDate.isEmpty() && !endDate.isEmpty()) {
       ps = conn.prepareStatement(
-              "SELECT o.id, o.order_date, o.status, " +
-                      "IFNULL(SUM(oi.price * oi.quantity), 0) AS total_price " +
-                      "FROM orders o " +
-                      "LEFT JOIN order_items oi ON o.id = oi.order_id " +
-                      "WHERE o.user_id = ? AND DATE(o.order_date) BETWEEN ? AND ? " +
-                      "GROUP BY o.id ORDER BY o.order_date DESC"
+              "SELECT id, order_date, status, total_amount " +
+                      "FROM orders WHERE user_id = ? AND DATE(order_date) BETWEEN ? AND ? ORDER BY order_date DESC"
       );
       ps.setInt(1, user.getId());
       ps.setString(2, startDate);
       ps.setString(3, endDate);
     } else {
       ps = conn.prepareStatement(
-              "SELECT o.id, o.order_date, o.status, " +
-                      "IFNULL(SUM(oi.price * oi.quantity), 0) AS total_price " +
-                      "FROM orders o " +
-                      "LEFT JOIN order_items oi ON o.id = oi.order_id " +
-                      "WHERE o.user_id = ? GROUP BY o.id ORDER BY o.order_date DESC"
+              "SELECT id, order_date, status, total_amount " +
+                      "FROM orders WHERE user_id = ? ORDER BY order_date DESC"
       );
       ps.setInt(1, user.getId());
     }
@@ -60,7 +49,7 @@
       order.put("id", rs.getString("id"));
       order.put("order_date", rs.getString("order_date"));
       order.put("status", rs.getString("status"));
-      order.put("total_price", rs.getString("total_price"));
+      order.put("total_amount", rs.getString("total_amount"));
       orders.add(order);
     }
 
@@ -104,7 +93,7 @@
     <td><%= od.get("id") %></td>
     <td><%= od.get("order_date") %></td>
     <td><%= od.get("status") %></td>
-    <td>$<%= od.get("total_price") %></td>
+    <td>$<%= od.get("total_amount") %></td>
   </tr>
   <%
       }
