@@ -10,6 +10,17 @@
 </head>
 <body>
 <div class="cart-container">
+
+  // display an error message when cart is empty
+  <% String error = (String) session.getAttribute("error");
+    if (error != null) {
+  %>
+  <div class="alert alert-danger"><%= error %></div>
+  <%
+      session.removeAttribute("error");
+    }
+  %>
+
   <h2>Your Shopping Cart</h2>
 
   <%

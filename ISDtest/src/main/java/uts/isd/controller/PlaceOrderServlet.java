@@ -29,6 +29,7 @@ public class PlaceOrderServlet extends HttpServlet {
 
 
         if (cart == null || cart.isEmpty()) {
+            session.setAttribute("error", "Place order failed: Your cart is empty."); // error message in server side
             response.sendRedirect(request.getContextPath() + "/cart.jsp");
             return;
         }
@@ -54,7 +55,7 @@ public class PlaceOrderServlet extends HttpServlet {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            int orderId = rs.getInt(1); // 생성된 주문 ID
+            int orderId = rs.getInt(1); // created order ID
 
             // save items
             PreparedStatement itemPS = conn.prepareStatement(
@@ -62,14 +63,19 @@ public class PlaceOrderServlet extends HttpServlet {
             );
 
             for (CartItem item : cart) {
+                // validate the inventory in server side
+                int stock = dao.Devices().getDeviceById(item.getDeviceId()).getQuantity();
+                if (item.getQuantity() > stock) {
+                    session.setAttribute("error", "Product \"" + item.getName() + "\" is out of stock or not enough quantity.");
+                    response.sendRedirect(request.getContextPath() + "/cart.jsp");
+                    return;
+                }
                 itemPS.setInt(1, orderId);
                 itemPS.setInt(2, item.getDeviceId());
                 itemPS.setInt(3, item.getQuantity());
                 itemPS.setBigDecimal(4, item.getPrice());
                 itemPS.executeUpdate();
 
-                // reduce inventory
-                dao.Devices().updateDeviceQuantity(item.getDeviceId(), -item.getQuantity());
             }
 
             // save order id in session

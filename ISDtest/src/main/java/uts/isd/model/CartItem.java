@@ -16,10 +16,21 @@ public class CartItem {
     }
 
     public int getDeviceId() { return deviceId; }
+
     public String getName() { return name; }
+
     public BigDecimal getPrice() { return price; }
+
     public int getQuantity() { return quantity; }
 
     public void incrementQuantity() { quantity++; }
+
+    public void decrementQuantity() {
+        if (quantity > 0) {
+            quantity--;
+        }
+    }
+
+
     public BigDecimal getTotal() { return price.multiply(new BigDecimal(quantity)); }
 }

@@ -34,7 +34,7 @@ public class CancelOrderServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderIdStr);
             Connection conn = dao.getConnection();
 
-            // status = cancelled
+            // status = cancelled -> if payment part finalised, will add 'paid' status
             PreparedStatement updateOrder = conn.prepareStatement(
                     "UPDATE orders SET status = 'cancelled' WHERE id = ?"
             );

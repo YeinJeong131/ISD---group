@@ -31,6 +31,9 @@ public class LoginServlet extends HttpServlet {
 
             if (user != null) {
                 session.setAttribute("loggedInUser", user);
+                String roleString = (user.getRole() == 1) ? "staff" : "customer";
+                session.setAttribute("userRole", roleString);
+
 
                 System.out.println("Login successful - user ID: " + user.getId());
 

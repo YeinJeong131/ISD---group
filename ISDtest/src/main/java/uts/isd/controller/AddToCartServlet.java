@@ -13,6 +13,8 @@ import java.util.List;
 
 @WebServlet("/cart/add")
 public class AddToCartServlet extends HttpServlet {
+
+    // post request method
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,15 +29,17 @@ public class AddToCartServlet extends HttpServlet {
             // out of stock or diff ID
             if (device == null || device.getQuantity() <= 0) {
                 session.setAttribute("error", "This product is out of stock.");
-                response.sendRedirect(request.getHeader("referer")); // 사용자가 있던 페이지로 되돌림
+                response.sendRedirect(request.getHeader("referer")); // redirect the page
                 return;
             }
 
-            // call cart from session
+            // call cart from session as a list if there's no cart
             List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
             if (cart == null) cart = new ArrayList<>();
 
             boolean found = false;
+
+            // compare to cart items to product
             for (CartItem item : cart) {
                 if (item.getDeviceId() == deviceId) {
                     // validate quantity
@@ -50,7 +54,7 @@ public class AddToCartServlet extends HttpServlet {
                 }
             }
 
-            // not in cart
+            // if product not in cart, get new cart item and add product
             if (!found) {
                 cart.add(new CartItem(device.getId(), device.getName(), device.getPrice()));
             }

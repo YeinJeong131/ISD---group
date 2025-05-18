@@ -19,8 +19,18 @@ public class RemoveFromCartServlet extends HttpServlet {
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 
         if (cart != null) {
-            cart.removeIf(item -> item.getDeviceId() == deviceId);
-            session.setAttribute("cart", cart); // 업데이트 반영
+            for (int i = 0; i < cart.size(); i++) {
+                CartItem item = cart.get(i);
+                if (item.getDeviceId() == deviceId) {
+                    if (item.getQuantity() > 1) {
+                        item.decrementQuantity(); // decrease by 1 in quantity
+                    } else {
+                        cart.remove(i); // if quantity is 1, remove
+                    }
+                    break;
+                }
+            }
+            session.setAttribute("cart", cart);
         }
 
         response.sendRedirect(request.getContextPath() + "/cart.jsp");
